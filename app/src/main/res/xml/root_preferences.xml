@@ -1,0 +1,43 @@
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.PreferenceCategory app:title="Accounts">
+
+        <androidx.preference.PreferenceScreen
+            app:title="Profile"
+            app:summary="See and edit profile information">
+
+            <intent android:action="my_action.startProfileActivity"/>
+
+        </androidx.preference.PreferenceScreen>
+
+        <androidx.preference.PreferenceScreen
+            app:title="Account"
+            app:summary="Change account" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory app:title="Recipes">
+
+        <androidx.preference.PreferenceScreen
+            app:key="Allergies"
+            app:title="Allergies"
+            app:summary="Select allergies to filter"
+            app:dialogTitle="Select allergies">
+
+            <intent android:action="my_action.startAllergiesActivity"/>
+        </androidx.preference.PreferenceScreen>
+
+
+        <androidx.preference.ListPreference
+            app:key="units"
+            app:title="Units"
+            app:entryValues="@array/units"
+            app:entries="@array/units"
+            app:summary="Choose units from imperial or metric"
+            app:dialogTitle="Unit Preference"
+            />
+
+    </androidx.preference.PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

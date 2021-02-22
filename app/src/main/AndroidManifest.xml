@@ -9,7 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CS65_Final_Project">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.RecipeViewActivity"></activity>
+        <activity android:name=".activities.AddIngredientActivity" />
+        <activity android:name=".activities.AllergiesActivity">
+            <intent-filter>
+                <action android:name="my_action.startAllergiesActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.ProfileActivity">
+            <intent-filter>
+                <action android:name="my_action.startProfileActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,6 +34,7 @@
         </activity>
         <activity android:name=".ChangePasswordActivity"></activity>
         <activity android:name=".CreateAccountActivity"></activity>
+        <activity android:name=".activities.HomeActivity"></activity>
     </application>
 
 </manifest>

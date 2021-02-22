@@ -1,0 +1,24 @@
+<resources>
+    <!-- Common allergies -->
+    <string-array name="allergies">
+        <item>Milk</item>
+        <item>Eggs</item>
+        <item>Peanuts</item>
+        <item>Tree Nuts</item>
+        <item>Soy</item>
+        <item>Wheat</item>
+        <item>Fish</item>
+        <item>Shellfish</item>
+    </string-array>
+
+    <string-array name="units">
+        <item>Imperial (ounces)</item>
+        <item>Metric (grams)</item>
+    </string-array>
+
+    <string-array name="demo_fridge">
+        <item>Tomatoes</item>
+        <item>Onions</item>
+        <item>Chicken</item>
+    </string-array>
+</resources>

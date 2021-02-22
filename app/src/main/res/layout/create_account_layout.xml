@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:hint="Email"
-        android:inputType="text">
+        android:inputType="textEmailAddress">
 
     </EditText>
 

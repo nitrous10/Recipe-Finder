@@ -2,6 +2,7 @@ package com.example.cs65_final_project;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public void createAccountConfirmPressed(View v) {
+        Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show();
         finish();
     }
 }
