@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/createAccountTextView"
+        android:textColor="@color/brick_red"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:text="Create Account">
+
+    </TextView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,17 +24,18 @@
         android:textColor="@color/brick_red"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="50dp"
-        android:id="@+id/emailTextView"
+        android:layout_below="@+id/createAccountTextView"
+        android:layout_marginTop="5dp"
+        android:id="@+id/createEmailTextView"
         android:text="Email">
 
     </TextView>
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/createEmailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailTextView"
+        android:layout_below="@+id/createEmailTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:hint="Email"
@@ -38,9 +50,9 @@
         android:textColor="@color/brick_red"
         android:textStyle="bold"
         android:layout_margin="5dp"
-        android:layout_below="@+id/emailEditText"
+        android:layout_below="@+id/createEmailEditText"
         android:layout_marginTop="10dp"
-        android:id="@+id/passwordTextView"
+        android:id="@+id/createPasswordTextView"
         android:text="Password">
 
     </TextView>
@@ -50,19 +62,19 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/passwordTextView"
+        android:layout_below="@id/createPasswordTextView"
         android:layout_marginTop="5dp"
-        android:id="@+id/passwordEditText"
+        android:id="@+id/createPasswordEditText"
         android:hint="Password">
 
     </EditText>
 
     <LinearLayout
-        android:id="@+id/loginChangeLinearLayout"
+        android:id="@+id/createLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/passwordEditText"
+        android:layout_below="@+id/createPasswordEditText"
         android:layout_marginTop="10dp"
         android:weightSum="2">
 
@@ -71,9 +83,9 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:backgroundTint="@color/brick_red"
-            android:onClick="loginButtonPressed"
+            android:onClick="createCancelPressed"
             android:layout_margin="5dp"
-            android:text="Login">
+            android:text="Cancel">
 
         </Button>
 
@@ -82,37 +94,12 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:backgroundTint="@color/brick_red"
-            android:onClick="changePasswordPressed"
+            android:onClick="createAccountConfirmPressed"
             android:layout_margin="5dp"
-            android:text="Change Password">
+            android:text="Create Account">
 
         </Button>
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/orTextView"
-        android:layout_below="@+id/loginChangeLinearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:text="or"
-        android:textColor="@color/brick_red">
-
-    </TextView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:layout_below="@id/orTextView"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/brick_red"
-        android:layout_marginTop="5dp"
-        android:onClick="createAccountPressed">
-
-    </Button>
-
 
 </RelativeLayout>

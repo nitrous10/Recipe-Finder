@@ -25,4 +25,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
         startActivity(intent);
     }
+
+    public void createAccountPressed(View v) {
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        startActivity(intent);
+    }
 }
