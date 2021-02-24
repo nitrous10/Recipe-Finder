@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CS65_Final_Project">
-        <activity android:name=".activities.RecipeViewActivity"></activity>
-        <activity android:name=".activities.AddIngredientActivity" />
+        <activity android:name=".activities.SearchAddIngredientActivity"></activity>
+        <activity android:name=".activities.RecipeViewActivity" />
+        <activity android:name=".activities.ManualAddIngredientActivity" />
         <activity android:name=".activities.AllergiesActivity">
             <intent-filter>
                 <action android:name="my_action.startAllergiesActivity" />
@@ -32,9 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChangePasswordActivity"></activity>
-        <activity android:name=".CreateAccountActivity"></activity>
-        <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".activities.ChangePasswordActivity" />
+        <activity android:name=".activities.CreateAccountActivity" />
+        <activity android:name=".activities.HomeActivity" />
     </application>
 
 </manifest>

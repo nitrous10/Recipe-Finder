@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fridge_page"
+        android:enabled="true"
+        android:title="@string/fridge"
+        android:icon="@drawable/ic_fridge"/>
+    <item
+        android:id="@+id/search_page"
+        android:enabled="true"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"/>
+    <item
+        android:id="@+id/feed_page"
+        android:enabled="true"
+        android:title="@string/feed"
+        android:icon="@drawable/ic_feed"/>
+    <item
+        android:id="@+id/settings_page"
+        android:enabled="true"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
+</menu>
