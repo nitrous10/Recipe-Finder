@@ -10,13 +10,28 @@
         android:layout_height="match_parent"
         android:id="@+id/list_fridge"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_my_icon"
-        android:contentDescription="@string/add_ingredient"
-        android:layout_margin="16dp"
-        android:id="@+id/add_ingredient" />
+        android:orientation="vertical"
+        android:layout_gravity="end|bottom">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:contentDescription="@string/add_ingredient"
+            android:layout_margin="16dp"
+            android:id="@+id/search_add_ingredient" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:contentDescription="@string/add_ingredient"
+            android:layout_margin="16dp"
+            android:id="@+id/manual_add_ingredient" />
+
+    </LinearLayout>
 
 </FrameLayout>

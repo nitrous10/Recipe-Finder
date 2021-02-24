@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SearchFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/ingredient_search"
+            android:textSize="25sp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:id="@+id/recipe_search"
+            android:layout_marginTop="20dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_recipe"
+            android:layout_below="@+id/recipe_search"
+            android:layout_marginTop="10dp"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

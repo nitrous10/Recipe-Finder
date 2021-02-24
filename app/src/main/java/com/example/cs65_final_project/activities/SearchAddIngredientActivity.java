@@ -6,12 +6,12 @@ import android.os.Bundle;
 
 import com.example.cs65_final_project.R;
 
-public class AddIngredientActivity extends AppCompatActivity {
+public class SearchAddIngredientActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_ingredient);
-        setTitle("Add Ingredient");
+        setContentView(R.layout.activity_search_add_ingredient);
+        setTitle("Search to add Ingredient");
     }
 }
