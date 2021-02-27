@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.cs65_final_project.FirebaseAuthHelper;
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
+import com.example.cs65_final_project.FirebaseStorageHelper;
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.fragments.PhotoGalleryDialog;
 import com.google.firebase.database.FirebaseDatabase;
@@ -82,12 +83,14 @@ public class ProfileActivity extends AppCompatActivity {
             //Create new account in firebase
             try {
                 FirebaseAuthHelper.createUser(this, newEmail, newPassword, nameEditText.getText().toString(), bioEditText.getText().toString());
+                FirebaseStorageHelper.savePicture(pic);
             } catch (Exception e) {
                 Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
             }
         } else {
             try {
                 FirebaseDatabaseHelper.updateProfile(this, nameEditText.getText().toString(), bioEditText.getText().toString());
+                FirebaseStorageHelper.savePicture(pic);
             } catch (Exception e) {
                 Toast.makeText(this, "Failed to Update Info!", Toast.LENGTH_SHORT).show();
             }
@@ -137,6 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadProfile(){
         FirebaseDatabaseHelper.loadProfile(nameEditText, bioEditText, emailEditText);
+        FirebaseStorageHelper.loadPicture(pic);
     }
 
     /** Helper class to check for necessary permissions */
