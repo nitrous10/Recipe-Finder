@@ -16,6 +16,10 @@
             app:summary="Change account"
             app:key="Accounts"/>
 
+        <androidx.preference.PreferenceScreen
+            app:title="Logout"
+            app:key="Logout"/>
+
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory app:title="Recipes">

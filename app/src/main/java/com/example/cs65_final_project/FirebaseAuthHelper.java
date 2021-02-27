@@ -108,5 +108,9 @@ public class FirebaseAuthHelper {
         });
     }
 
+    public static void logout() {
+        FirebaseAuth.getInstance().signOut();
+    }
+
 
 }
