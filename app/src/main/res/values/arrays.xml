@@ -21,4 +21,9 @@
         <item>Onions</item>
         <item>Chicken</item>
     </string-array>
+
+    <string-array name="photo_or_gallery">
+        <item>Take photo</item>
+        <item>Find photo from Gallery</item>
+    </string-array>
 </resources>

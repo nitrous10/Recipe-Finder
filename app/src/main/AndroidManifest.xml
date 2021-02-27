@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cs65_final_project">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,16 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CS65_Final_Project">
-        <activity android:name=".activities.SearchAddIngredientActivity"></activity>
+        <activity android:name=".activities.SearchAddIngredientActivity" />
         <activity android:name=".activities.RecipeViewActivity" />
         <activity android:name=".activities.ManualAddIngredientActivity" />
-        <activity android:name=".activities.AllergiesActivity">
-            <intent-filter>
-                <action android:name="my_action.startAllergiesActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".activities.ProfileActivity">
             <intent-filter>
                 <action android:name="my_action.startProfileActivity" />
@@ -36,6 +33,17 @@
         <activity android:name=".activities.ChangePasswordActivity" />
         <activity android:name=".activities.CreateAccountActivity" />
         <activity android:name=".activities.HomeActivity" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.cs65_final_project"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

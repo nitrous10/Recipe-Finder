@@ -1,105 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/account_creation_frame">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/createAccountTextView"
-        android:textColor="@color/brick_red"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
-        android:text="Create Account">
-
-    </TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/brick_red"
-        android:textStyle="bold"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@+id/createAccountTextView"
-        android:layout_marginTop="5dp"
-        android:id="@+id/createEmailTextView"
-        android:text="Email">
-
-    </TextView>
-
-    <EditText
-        android:id="@+id/createEmailEditText"
+    <RelativeLayout
+        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/createEmailTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress">
+        android:layout_height="match_parent">
 
-    </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/createAccountTextView"
+            android:textColor="@color/brick_red"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            android:text="@string/create_account">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/brick_red"
-        android:textStyle="bold"
-        android:layout_margin="5dp"
-        android:layout_below="@+id/createEmailEditText"
-        android:layout_marginTop="10dp"
-        android:id="@+id/createPasswordTextView"
-        android:text="Password">
+        </TextView>
 
-    </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/brick_red"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/createAccountTextView"
+            android:layout_marginTop="5dp"
+            android:id="@+id/createEmailTextView"
+            android:text="@string/email">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/createPasswordTextView"
-        android:layout_marginTop="5dp"
-        android:id="@+id/createPasswordEditText"
-        android:hint="Password">
+        </TextView>
 
-    </EditText>
+        <EditText
+            android:id="@+id/createEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/createEmailTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress">
 
-    <LinearLayout
-        android:id="@+id/createLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/createPasswordEditText"
-        android:layout_marginTop="10dp"
-        android:weightSum="2">
+        </EditText>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/brick_red"
-            android:onClick="createCancelPressed"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/brick_red"
+            android:textStyle="bold"
             android:layout_margin="5dp"
-            android:text="Cancel">
+            android:layout_below="@+id/createEmailEditText"
+            android:layout_marginTop="10dp"
+            android:id="@+id/createPasswordTextView"
+            android:text="@string/password">
 
-        </Button>
+        </TextView>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/brick_red"
-            android:onClick="createAccountConfirmPressed"
-            android:layout_margin="5dp"
-            android:text="Create Account">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/createPasswordTextView"
+            android:layout_marginTop="5dp"
+            android:id="@+id/createPasswordEditText"
+            android:hint="@string/password">
 
-        </Button>
+        </EditText>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/createLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:weightSum="2"
+            android:layout_alignParentBottom="true">
 
-</RelativeLayout>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brick_red"
+                android:onClick="createCancelPressed"
+                android:layout_margin="5dp"
+                android:text="@string/cancel">
+            </Button>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brick_red"
+                android:onClick="createNextPressed"
+                android:layout_margin="5dp"
+                android:text="@string/next"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

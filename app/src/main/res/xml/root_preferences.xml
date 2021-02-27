@@ -13,7 +13,8 @@
 
         <androidx.preference.PreferenceScreen
             app:title="Account"
-            app:summary="Change account" />
+            app:summary="Change account"
+            app:key="Accounts"/>
 
     </androidx.preference.PreferenceCategory>
 
@@ -24,10 +25,7 @@
             app:title="Allergies"
             app:summary="Select allergies to filter"
             app:dialogTitle="Select allergies">
-
-            <intent android:action="my_action.startAllergiesActivity"/>
         </androidx.preference.PreferenceScreen>
-
 
         <androidx.preference.ListPreference
             app:key="units"
