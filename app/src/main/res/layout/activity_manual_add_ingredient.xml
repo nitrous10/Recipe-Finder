@@ -29,7 +29,8 @@
             android:hint="@string/amount"
             android:id="@+id/input_amount"
             android:layout_marginTop="20dp"
-            android:inputType="phone"/>
+            android:inputType="numberDecimal"
+            android:singleLine="true"/>
 
         <Spinner
             android:layout_width="match_parent"
@@ -51,7 +52,7 @@
             android:hint="@string/calories"
             android:id="@+id/input_calorie"
             android:layout_marginTop="20dp"
-            android:inputType="phone"/>
+            android:inputType="numberDecimal"/>
 
 
         <EditText
@@ -60,7 +61,7 @@
             android:hint="@string/price"
             android:id="@+id/input_price"
             android:layout_marginTop="20dp"
-            android:inputType="phone" />
+            android:inputType="numberDecimal" />
 
         <EditText
             android:layout_width="match_parent"

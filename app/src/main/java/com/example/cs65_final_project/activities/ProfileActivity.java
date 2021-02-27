@@ -14,9 +14,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.cs65_final_project.FirebaseAuthHelper;
+import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.fragments.PhotoGalleryDialog;
+import com.google.firebase.database.FirebaseDatabase;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
@@ -35,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private String newPassword;
     private String newEmail;
+    private EditText nameEditText, bioEditText, emailEditText;
     private boolean isNew;
     private Uri tempUri;
     private CircleImageView pic;
@@ -45,12 +51,21 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         setTitle("Profile");
         pic = findViewById(R.id.profile_pic);
+        nameEditText = findViewById(R.id.input_name);
+        bioEditText = findViewById(R.id.self_introduction);
+        emailEditText = findViewById(R.id.input_email);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             isNew = bundle.getBoolean(NEW_PROFILE);
             newEmail = bundle.getString(EMAIL);
             newPassword = bundle.getString(PASSWORD);
+        }
+
+        if (!isNew) {
+            nameEditText.setHint("Loading");
+            bioEditText.setHint("Loading");
+            loadProfile();
         }
     }
 
@@ -65,9 +80,18 @@ public class ProfileActivity extends AppCompatActivity {
         // Save to firebase
         if(isNew){
             //Create new account in firebase
+            try {
+                FirebaseAuthHelper.createUser(this, newEmail, newPassword, nameEditText.getText().toString(), bioEditText.getText().toString());
+            } catch (Exception e) {
+                Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            try {
+                FirebaseDatabaseHelper.updateProfile(this, nameEditText.getText().toString(), bioEditText.getText().toString());
+            } catch (Exception e) {
+                Toast.makeText(this, "Failed to Update Info!", Toast.LENGTH_SHORT).show();
+            }
         }
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
     }
 
     public void onCancelPressed(View view){
@@ -112,7 +136,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void loadProfile(){
-
+        FirebaseDatabaseHelper.loadProfile(nameEditText, bioEditText, emailEditText);
     }
 
     /** Helper class to check for necessary permissions */

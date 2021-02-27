@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.cs65_final_project.FirebaseAuthHelper;
 import com.example.cs65_final_project.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
+    private EditText emailEditText, passwordEditText;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         email = findViewById(R.id.createEmailEditText);
         password = findViewById(R.id.createPasswordEditText);
+        emailEditText = findViewById(R.id.createEmailEditText);
+        passwordEditText = findViewById(R.id.createPasswordEditText);
     }
 
     public void createCancelPressed(View v) {
