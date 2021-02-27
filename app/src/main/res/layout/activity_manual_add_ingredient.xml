@@ -18,16 +18,18 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ingredient"
+            android:hint="@string/ingredient_name"
             android:id="@+id/input_ingredient"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="text"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/amount"
             android:id="@+id/input_amount"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="phone"/>
 
         <Spinner
             android:layout_width="match_parent"
@@ -39,7 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Other Info:"
+            android:text="@string/other_info_optional"
             android:textSize="20sp"
             android:layout_marginTop="30dp"/>
 
@@ -48,7 +50,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/calories"
             android:id="@+id/input_calorie"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="phone"/>
 
 
         <EditText
@@ -56,14 +59,16 @@
             android:layout_height="wrap_content"
             android:hint="@string/price"
             android:id="@+id/input_price"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="phone" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/food_type"
             android:id="@+id/input_type"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="text"/>
 
     </LinearLayout>
 

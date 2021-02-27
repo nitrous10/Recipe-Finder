@@ -18,7 +18,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="recipe_search">Search for a recipe</string>
     <string name="add_ingredient">Add ingredient</string>
-    <string name="ingredient">Ingredient</string>
+    <string name="ingredient_name">Ingredient Name</string>
     <string name="amount">Amount</string>
     <string name="recipe">Recipe</string>
     <string name="ingredients">ingredients</string>
@@ -36,4 +36,24 @@
     <string name="ingredient_search">Search for an ingredient</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="milk">Milk</string>
+    <string name="eggs">Eggs</string>
+    <string name="wheat">Wheat</string>
+    <string name="fish">Fish</string>
+    <string name="shellfish">Shellfish</string>
+    <string name="soy">Soy</string>
+    <string name="peanuts">Peanuts</string>
+    <string name="tree_nuts">Tree Nuts</string>
+    <string name="common_allergies">Common Allergies:</string>
+    <string name="create_account">Create Account</string>
+    <string name="next">Next</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="other_info_optional">Other Info (Optional):</string>
+    <string name="name">Name:</string>
+    <string name="name_hint">Full name</string>
+    <string name="bio">Bio:</string>
+    <string name="self_introduction">Introduce yourself!</string>
+    <string name="change_password_here">Change Password Here</string>
+    <string name="add_account">Add Account</string>
 </resources>

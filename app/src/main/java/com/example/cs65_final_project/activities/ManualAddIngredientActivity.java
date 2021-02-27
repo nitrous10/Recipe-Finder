@@ -17,7 +17,7 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_add_ingredient);
-        setTitle("Manually add Ingredient");
+        setTitle("Manually Add Ingredient");
 
         saveButton = findViewById(R.id.save_button);
         cancelButton = findViewById(R.id.cancel_button);
