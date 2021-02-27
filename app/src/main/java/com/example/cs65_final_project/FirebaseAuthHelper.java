@@ -48,7 +48,8 @@ public class FirebaseAuthHelper {
      * Adds user to database after having been created
      */
     public static void addNewToDataBase() {
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String uid = mAuth.getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
         // Initialize the new user with a fridge, a list of friends, a list of allergies, and preferred units
@@ -56,6 +57,7 @@ public class FirebaseAuthHelper {
         ref.child("users").child(uid).child("friends").setValue("null");
         ref.child("users").child(uid).child("allergies").setValue("null");
         ref.child("users").child(uid).child("units").setValue("imperial");
+        ref.child("users").child(uid).child("feed").setValue("null");
     }
 
     /**
