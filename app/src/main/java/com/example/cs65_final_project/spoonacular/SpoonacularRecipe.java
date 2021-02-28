@@ -34,17 +34,4 @@ class SpoonacularRecipe {
     void setMissedIngredients(List<SpoonacularRecipeIngredient> missedIngredients) {
         this.missedIngredients = missedIngredients;
     }
-
-    private static class SpoonacularRecipeIngredient {
-
-        private String original;
-
-        private String getOriginal() {
-            return original;
-        }
-
-        private void setOriginal(String original) {
-            this.original = original;
-        }
-    }
 }

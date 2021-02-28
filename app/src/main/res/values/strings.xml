@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CS65_Final_Project</string>
+    <string name="app_name">Recipe Finder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Preference Titles -->
@@ -56,4 +56,5 @@
     <string name="self_introduction">Introduce yourself!</string>
     <string name="change_password_here">Change Password Here</string>
     <string name="add_account">Add Account</string>
+    <string name="search_title">Search for a recipe</string>
 </resources>

@@ -1,18 +1,17 @@
 package com.example.cs65_final_project;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data type for a recipe. We can create subclasses and additional features in the future
  *
  */
-
 public class Recipe {
     private String name;
-    private ArrayList<Ingredient> ingredients;
+    private List<Ingredient> ingredients;
     private int time;
 
-    public Recipe(String name, ArrayList<Ingredient> ingredients, int time){
+    public Recipe(String name, List<Ingredient> ingredients, int time){
         this.name = name;
         this.ingredients = ingredients;
         this.time = time;
@@ -22,7 +21,7 @@ public class Recipe {
         return name;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 

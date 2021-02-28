@@ -2,63 +2,57 @@ package com.example.cs65_final_project.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.Recipe;
 import com.example.cs65_final_project.activities.RecipeViewActivity;
 import com.example.cs65_final_project.adapters.SuggestedRecipeAdapter;
+import com.example.cs65_final_project.spoonacular.SpoonacularGatewayController;
 
 import java.util.ArrayList;
+import java.util.List;
 
+public class SearchFragment extends Fragment implements AdapterView.OnItemClickListener,
+        SearchView.OnQueryTextListener {
 
-public class SearchFragment extends Fragment implements AdapterView.OnItemClickListener {
+    private Handler mSearchQueryHandler;
 
-    private ArrayList<Recipe> suggestedRecipes;
+    private List<Recipe> mSuggestedRecipes;
+    private SuggestedRecipeAdapter mSuggestedRecipeAdapter;
 
-    public SearchFragment() {
-        // Required empty public constructor
-    }
+    // TODO: Should be in RecipeSearchController
+    private SpoonacularGatewayController mSpoonacularGatewayController;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        //Demo recipes
-        suggestedRecipes = new ArrayList<>();
-        ArrayList<Ingredient> ingredientsOne = new ArrayList<>();
-        ingredientsOne.add(new Ingredient("Tomatoes", 2));
-        ingredientsOne.add(new Ingredient("Chicken", 100));
-        ingredientsOne.add(new Ingredient("Salt", 15));
-        suggestedRecipes.add(new Recipe("Suggested recipe #1", ingredientsOne,30));
+        mSpoonacularGatewayController = new SpoonacularGatewayController();
 
-        ArrayList<Ingredient> ingredientsTwo = new ArrayList<>();
-        ingredientsTwo.add(new Ingredient("Tomatoes", 1));
-        ingredientsTwo.add(new Ingredient("Chicken", 150));
-        ingredientsTwo.add(new Ingredient("Onion", 1));
-        suggestedRecipes.add(new Recipe("Suggested recipe #2", ingredientsTwo, 20));
+        HandlerThread handlerThread = new HandlerThread("HandlerThread");
+        handlerThread.start();
+        mSearchQueryHandler = new Handler(handlerThread.getLooper());
 
-        ArrayList<Ingredient> ingredientsThree = new ArrayList<>();
-        ingredientsThree.add(new Ingredient("Cabbage", 1));
-        ingredientsThree.add(new Ingredient("Chicken", 150));
-        ingredientsThree.add(new Ingredient("Onion", 1));
-        ingredientsThree.add(new Ingredient("Salt", 10));
-        suggestedRecipes.add(new Recipe("Suggested recipe #3", ingredientsThree, 20));
+        mSuggestedRecipes = new ArrayList<>();
+        mSuggestedRecipeAdapter = new SuggestedRecipeAdapter(getActivity(), mSuggestedRecipes);
 
-        ListView listView = view.findViewById(R.id.list_recipe);
-        SuggestedRecipeAdapter demoAdapter = new SuggestedRecipeAdapter(getActivity(), suggestedRecipes);
-        listView.setAdapter(demoAdapter);
-        listView.setOnItemClickListener(this);
+        ListView listView = view.findViewById(R.id.recipe_list_view);
+        listView.setAdapter(mSuggestedRecipeAdapter);
+
+        SearchView searchView = (SearchView) view.findViewById(R.id.recipe_search_view);
+        searchView.setOnQueryTextListener(this);
 
         return view;
     }
@@ -68,5 +62,29 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(getActivity(), RecipeViewActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mSearchQueryHandler.removeCallbacksAndMessages(null);
+        mSearchQueryHandler.postDelayed((Runnable) () -> {
+//            try {
+//                List<Recipe> recipes =
+//                        mSpoonacularGatewayController.getRecipes(Arrays.asList("apple","sugar"), 10);
+//
+//                getActivity().runOnUiThread(() -> {
+//                    mSuggestedRecipeAdapter.updateRecipes(recipes);
+//                });
+//            } catch (SpoonacularException e) {
+//                Toast.makeText(getActivity(), "Faild to get recipes!", Toast.LENGTH_LONG).show();
+//            }
+        }, 500);
+
+        return false;
     }
 }

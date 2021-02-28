@@ -20,7 +20,7 @@ import okhttp3.Response;
  * Client for interacting with the Spoonacular API. Everything related to the Spoonacular API should
  * live here.
  */
-public class SpoonacularClient {
+class SpoonacularClient {
 
     private final static String BASE_URL = "https://api.spoonacular.com";
     // TODO: Make this more secure?
