@@ -26,4 +26,10 @@
         <item>Take photo</item>
         <item>Find photo from Gallery</item>
     </string-array>
+
+    <string-array name="ingredient_units">
+        <item>g</item>
+        <item>cups</item>
+        <item>pieces</item>
+    </string-array>
 </resources>

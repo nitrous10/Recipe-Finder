@@ -1,13 +1,44 @@
 package com.example.cs65_final_project.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.text.InputType;
+import android.text.Layout;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 
+import com.example.cs65_final_project.FirebaseDatabaseHelper;
+import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.R;
+import com.example.cs65_final_project.adapters.SearchIngredientAdapter;
+import com.example.cs65_final_project.exceptions.SpoonacularException;
+import com.example.cs65_final_project.spoonacular.SpoonacularGatewayController;
 
-public class SearchAddIngredientActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchAddIngredientActivity extends AppCompatActivity implements ListView.OnItemClickListener,
+        SearchView.OnQueryTextListener {
+
+    private List<Ingredient> results;
+    private SpoonacularGatewayController controller;
+    private Handler resultsHandler;
+    private SearchIngredientAdapter adapter;
+
+    public static final int RESULT_NUM = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +46,73 @@ public class SearchAddIngredientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_add_ingredient);
         setTitle("Search to add Ingredient");
 
-        ListView listView = findViewById(R.id.list_ingredients);
+        controller = new SpoonacularGatewayController();
+        results = new ArrayList<>();
+        HandlerThread handlerThread = new HandlerThread("IngredientResultThread");
+        handlerThread.start();
+        resultsHandler = new Handler(handlerThread.getLooper());
+
+        SearchView searchView = findViewById(R.id.ingredient_search_view);
+        searchView.setOnQueryTextListener(this);
+
+        ListView listView = findViewById(R.id.ingredient_list_view);
+        adapter = new SearchIngredientAdapter(this, results);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        updateListView(s);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        Log.d("Ingredient Search", "Results list: " + results);
+        updateListView(s);
+        return false;
+    }
+
+    private void updateListView(String s){
+        resultsHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    results = controller.getIngredients(s, RESULT_NUM);
+                } catch (SpoonacularException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        if(results != null){
+            adapter.updateData(results);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    /** When an ingredient is chosen, prompt for amount*/
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Ingredient ingredientChosen = (Ingredient)adapterView.getItemAtPosition(i);
+        Log.d("debug", "OnItemClick called for ingredient: " + ingredientChosen);
+
+        // Start dialog for amount
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.edit_text, null);
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Amount")
+                .setView(dialogView).create();
+
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                EditText input = dialogView.findViewById(R.id.input);
+                input.setInputType(InputType.TYPE_CLASS_PHONE);
+                FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this, ingredientChosen.getName(),
+                        Float.parseFloat(input.getText().toString()));
+                // Add units and such later
+            }
+        });
+
+        dialog.show();
     }
 }

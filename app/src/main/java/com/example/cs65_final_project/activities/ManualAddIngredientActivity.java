@@ -2,10 +2,13 @@ package com.example.cs65_final_project.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
@@ -29,6 +32,9 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
         cancelButton = findViewById(R.id.cancel_button);
         saveButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
+        Spinner units = findViewById(R.id.input_units);
+        units.setAdapter(ArrayAdapter.createFromResource(this, R.array.ingredient_units,
+                android.R.layout.simple_spinner_dropdown_item));
     }
 
     @Override

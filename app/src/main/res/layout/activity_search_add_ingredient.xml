@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.SearchFragment">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <SearchView
+        android:id="@+id/ingredient_search_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false" >
 
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/ingredient_search"
-            android:textSize="25sp"
-            android:singleLine="true"
-            android:gravity="center"
-            android:id="@+id/recipe_search"
-            android:layout_marginTop="20dp" />
+        <requestFocus />
+    </SearchView>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/list_ingredients"
-            android:layout_below="@+id/recipe_search"
-            android:layout_marginTop="10dp"/>
+    <ListView
+        android:id="@+id/ingredient_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/ingredient_search_view"
+        android:layout_marginTop="10dp" />
 
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>
