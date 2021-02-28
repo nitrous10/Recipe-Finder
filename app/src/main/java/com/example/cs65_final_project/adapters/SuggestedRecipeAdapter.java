@@ -17,11 +17,8 @@ import java.util.List;
 
 public class SuggestedRecipeAdapter extends ArrayAdapter<Recipe> {
 
-    private List<Recipe> mRecipes;
-
     public SuggestedRecipeAdapter(@NonNull Context context, List<Recipe> recipes) {
         super(context, 0, recipes);
-        mRecipes = recipes;
     }
 
     @NonNull
@@ -45,17 +42,5 @@ public class SuggestedRecipeAdapter extends ArrayAdapter<Recipe> {
         timeText.setText(timeString);
 
         return convertView;
-    }
-
-    /**
-     * Updates the recipes in this adapter.
-     *
-     * NOTE: MUST BE RUN ON MAIN UI THREAD.
-     *
-     * @param recipes the new recipes for this adapter
-     */
-    public void updateRecipes(List<Recipe> recipes) {
-        mRecipes = recipes;
-        notifyDataSetChanged();
     }
 }
