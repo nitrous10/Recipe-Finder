@@ -41,8 +41,7 @@ public class FirebaseStorageHelper {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
+                // Handle successful uploads
             }
         });
     }
@@ -52,8 +51,8 @@ public class FirebaseStorageHelper {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference userRef = storageReference.child(uid);
 
-        final long ONE_MEGABYTE = 1024*1024*5;
-        userRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        final long Five_MEGABYTES = 1024*1024*5;
+        userRef.getBytes(Five_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
