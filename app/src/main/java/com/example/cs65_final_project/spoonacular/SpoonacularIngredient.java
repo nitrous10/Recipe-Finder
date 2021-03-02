@@ -6,10 +6,13 @@ package com.example.cs65_final_project.spoonacular;
 class SpoonacularIngredient {
 
     private String name;
+    private String aisle;
 
     String getName() {
         return name;
     }
+
+    public String getAisle() { return aisle; }
 
     void setName(String name) {
         this.name = name;

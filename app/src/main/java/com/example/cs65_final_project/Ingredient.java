@@ -7,11 +7,20 @@ package com.example.cs65_final_project;
 public class Ingredient {
     private String name;
     private float amount;
+    private String aisle;
+
+    public Ingredient(String name, float amount, String aisle){
+        this.name = name;
+        this.amount = amount;
+        this.aisle = aisle;
+    }
 
     public Ingredient(String name, float amount){
         this.name = name;
         this.amount = amount;
     }
+
+    public String getAisle() { return aisle; }
 
     public float getAmount() {
         return amount;

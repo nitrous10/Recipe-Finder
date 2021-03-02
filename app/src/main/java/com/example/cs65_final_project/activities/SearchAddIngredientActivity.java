@@ -38,7 +38,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
     private Handler resultsHandler;
     private SearchIngredientAdapter adapter;
 
-    public static final int RESULT_NUM = 10;
+    public static final int RESULT_NUM = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
             @Override
             public void run() {
                 try {
-                    results = controller.getIngredients(s, RESULT_NUM);
+                    results = controller.getIngredients(s, RESULT_NUM, true);
                 } catch (SpoonacularException e) {
                     e.printStackTrace();
                 }
