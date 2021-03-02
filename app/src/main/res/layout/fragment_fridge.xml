@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".fragments.FridgeFragment">
 
-    <androidx.viewpager.widget.ViewPager
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fridge_view_pager"/>
+        android:id="@+id/current_fridge"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

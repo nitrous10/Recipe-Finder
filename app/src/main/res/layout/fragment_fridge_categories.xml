@@ -1,0 +1,241 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/meat"
+                android:scaleType="fitEnd"
+                android:paddingRight="60dp"
+                android:background="@color/white"
+                android:id="@+id/meat_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Meat"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/meat_button"
+                android:layout_marginStart="60dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/bread"
+                android:scaleType="fitEnd"
+                android:paddingRight="40dp"
+                android:background="@color/white"
+                android:id="@+id/bread_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Bread"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/bread_button"
+                android:layout_marginStart="60dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/dairy"
+                android:scaleType="fitEnd"
+                android:paddingRight="60dp"
+                android:background="@color/white"
+                android:id="@+id/dairy_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Dairy"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/dairy_button"
+                android:layout_marginStart="60dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/seafood"
+                android:scaleType="fitEnd"
+                android:paddingRight="50dp"
+                android:background="@color/white"
+                android:id="@+id/seafood_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Seafood"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/seafood_button"
+                android:layout_marginStart="50dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/seasoning"
+                android:scaleType="fitEnd"
+                android:paddingRight="60dp"
+                android:background="@color/white"
+                android:id="@+id/seasoning_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Seasoning"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/seasoning_button"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/vegetables"
+                android:scaleType="fitEnd"
+                android:paddingRight="40dp"
+                android:background="@color/white"
+                android:id="@+id/vegetables_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Vegetables"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/vegetables_button"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/beverages"
+                android:scaleType="fitEnd"
+                android:paddingRight="55dp"
+                android:background="@color/white"
+                android:id="@+id/beverages_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Beverages"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/beverages_button"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/nuts"
+                android:scaleType="fitEnd"
+                android:paddingRight="50dp"
+                android:background="@color/white"
+                android:id="@+id/nuts_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Nuts"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/nuts_button"
+                android:layout_marginStart="70dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/nuts"
+                android:scaleType="fitEnd"
+                android:paddingRight="50dp"
+                android:background="@color/white"
+                android:id="@+id/others_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Others"
+                android:textSize="25sp"
+                android:layout_alignStart="@+id/others_button"
+                android:layout_marginStart="70dp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

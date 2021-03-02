@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
@@ -32,7 +34,8 @@ public class FridgeFragment extends Fragment implements View.OnClickListener, Ad
     private FloatingActionButton searchAdd;
     private FloatingActionButton manualAdd;
     private ListView listView;
-    private ViewPager viewPager;
+
+    public static final String CATEGORIES_TAG = "categories tag";
 
     public FridgeFragment() {
         // Required empty public constructor
@@ -45,19 +48,14 @@ public class FridgeFragment extends Fragment implements View.OnClickListener, Ad
         View view = inflater.inflate(R.layout.fragment_fridge, container, false);
 
 //        listView = view.findViewById(R.id.list_fridge);
-        viewPager = view.findViewById(R.id.fridge_view_pager);
         searchAdd = view.findViewById(R.id.search_add_ingredient);
         manualAdd = view.findViewById(R.id.manual_add_ingredient);
         searchAdd.setOnClickListener(this);
         manualAdd.setOnClickListener(this);
 
-        Fragment one = new FridgeCategoryOne();
-        Fragment two = new FridgeCategoryTwo();
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(one);
-        fragments.add(two);
-        FridgePagerAdapter pagerAdapter = new FridgePagerAdapter(getChildFragmentManager(), fragments);
-        viewPager.setAdapter(pagerAdapter);
+        Fragment categories = new FridgeCategoryFragment();
+        FragmentManager fm = getChildFragmentManager();
+        fm.beginTransaction().add(R.id.current_fridge, categories, CATEGORIES_TAG).commit();
 
         return view;
     }

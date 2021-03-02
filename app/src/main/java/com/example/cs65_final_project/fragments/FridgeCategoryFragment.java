@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cs65_final_project.R;
 
-public class FridgeCategoryOne extends Fragment {
+public class FridgeCategoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fridge_one, null);
+        return inflater.inflate(R.layout.fragment_fridge_categories, null);
     }
 }
