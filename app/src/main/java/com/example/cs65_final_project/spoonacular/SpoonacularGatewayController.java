@@ -1,5 +1,7 @@
 package com.example.cs65_final_project.spoonacular;
 
+import androidx.annotation.Nullable;
+
 import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.Recipe;
 import com.example.cs65_final_project.exceptions.SpoonacularException;
@@ -19,9 +21,21 @@ public class SpoonacularGatewayController {
         this.mClient = new SpoonacularClient();
     }
 
-    public List<Recipe> getRecipes(List<String> ingredients,
+    public List<Recipe> getRecipes(@Nullable String searchQuery,
+                                   List<String> ingredients,
                                    int numOfResults) throws SpoonacularException {
-        return toRecipes(mClient.getRecipes(ingredients, numOfResults));
+        List<SpoonacularRecipe> spoonacularRecipes = mClient.getRecipes(ingredients, numOfResults);
+        return toRecipes(spoonacularRecipes.stream()
+                .filter(recipe -> matchesSearchQuery(recipe, searchQuery))
+                .collect(Collectors.toList()));
+    }
+
+    private boolean matchesSearchQuery(SpoonacularRecipe recipe, @Nullable String searchQuery) {
+        if (searchQuery == null) {
+            return true;
+        }
+
+        return recipe.getTitle().toLowerCase().contains(searchQuery);
     }
 
     public List<Ingredient> getIngredients(String query,

@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cs65_final_project.R;
@@ -60,6 +61,8 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
 
         mSearchProgressBar = (ProgressBar) view.findViewById(R.id.search_progress_bar);
 
+        searchRecipes(null, 10);
+
         return view;
     }
 
@@ -71,6 +74,16 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        searchRecipes(query, 50);   // TODO: numOfResults
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    private void searchRecipes(@Nullable String query, int numOfResults) {
         mSearchQueryHandler.removeCallbacksAndMessages(null);
         mSearchQueryHandler.post(() -> {
             try {
@@ -79,9 +92,10 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
                 });
 
                 List<Recipe> recipes = mSpoonacularGatewayController.getRecipes(
+                        query,
                         // TODO: Use ingredients in fridge
-                        Arrays.asList("apple","sugar"),
-                        10);
+                        Arrays.asList("blueberry","banana","sugar","eggs","milk"),
+                        numOfResults);
 
                 mRecipes.clear();
                 mRecipes.addAll(recipes);
@@ -90,17 +104,12 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
                     mSuggestedRecipeAdapter.notifyDataSetChanged();
                 });
             } catch (SpoonacularException e) {
-                getActivity().runOnUiThread(() ->
-                        Toast.makeText(getActivity(), "Failed to get recipes!", Toast.LENGTH_LONG)
-                                .show());
+                getActivity().runOnUiThread(() -> {
+                    mSearchProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                    Toast.makeText(getActivity(), "Failed to get recipes!", Toast.LENGTH_LONG)
+                            .show();
+                });
             }
         });
-
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
     }
 }

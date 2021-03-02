@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -29,7 +30,12 @@ class SpoonacularClient {
     private final OkHttpClient client;
 
     public SpoonacularClient() {
-        this.client = new OkHttpClient();
+        this.client = new OkHttpClient()
+                .newBuilder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
     }
 
     /**
@@ -66,6 +72,7 @@ class SpoonacularClient {
 
     /**
      * Fetch a list of possible recipes based on the provided list of ingredients.
+     *
      * @param ingredients list of ingredients for the recipe to include
      * @param numOfResults the number of recipes to return
      * @return list of recipes
@@ -73,19 +80,20 @@ class SpoonacularClient {
      *                              recipes from the Spoonacular API
      */
     public List<SpoonacularRecipe> getRecipes(List<String> ingredients,
-                                              final int numOfResults) throws SpoonacularException {
+                                              int numOfResults) throws SpoonacularException {
         Request request = new Request.Builder()
                 .url(HttpUrl.parse(BASE_URL + "/recipes/findByIngredients")
                         .newBuilder()
                         .addQueryParameter("apiKey", API_KEY)
                         .addQueryParameter("ingredients", StringUtils.join(ingredients, ","))
                         .addQueryParameter("number", String.valueOf(numOfResults))
+                        .addQueryParameter("ranking", String.valueOf(2))
                         .build())
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            String body = response.body().string();
-            SpoonacularRecipe[] recipes = (new Gson()).fromJson(body, SpoonacularRecipe[].class);
+            SpoonacularRecipe[] recipes =
+                    (new Gson()).fromJson(response.body().string(), SpoonacularRecipe[].class);
 
             return Arrays.asList(recipes);
         } catch (IOException e) {

@@ -27,19 +27,12 @@ public class SuggestedRecipeAdapter extends ArrayAdapter<Recipe> {
         Recipe recipe = getItem(position);
 
         if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.suggested_recipe_textview, parent, false);
+            convertView = LayoutInflater.from(getContext())
+                    .inflate(R.layout.suggested_recipe_textview, parent, false);
         }
 
-        //Get textViews for the listView
-        TextView recipeText = convertView.findViewById(R.id.recipe);
-        TextView ingredientsText = convertView.findViewById(R.id.ingredients);
-        TextView timeText = convertView.findViewById(R.id.time);
-
-        //Set correponding text
+        TextView recipeText = convertView.findViewById(R.id.recipe_title);
         recipeText.setText(recipe.getName());
-        ingredientsText.setText(recipe.getIngredientsAsString());
-        String timeString = recipe.getTime() + " minutes";
-        timeText.setText(timeString);
 
         return convertView;
     }

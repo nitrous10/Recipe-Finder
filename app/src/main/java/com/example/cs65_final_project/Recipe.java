@@ -25,19 +25,6 @@ public class Recipe {
         return ingredients;
     }
 
-    /** Format ingredient list as a string*/
-    public String getIngredientsAsString(){
-        //Format ingredients
-        if(ingredients != null){
-            String string = ingredients.get(0).getName();
-            for(int i=1; i<ingredients.size(); i++){
-                string += ", " + ingredients.get(i).getName();
-            }
-            return string;
-        }
-        return "";
-    }
-
     public int getTime() {
         return time;
     }

@@ -4,33 +4,10 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/recipe"
-            android:textSize="20sp"
-            android:id="@+id/recipe"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/estimated_time"
-            android:textSize="15sp"
-            android:id="@+id/time"
-            android:layout_weight="2" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ingredients"
-        android:id="@+id/ingredients"/>
+        android:textSize="20sp"
+        android:id="@+id/recipe_title" />
 
 </LinearLayout>
