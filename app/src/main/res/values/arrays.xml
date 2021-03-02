@@ -32,4 +32,22 @@
         <item>cups</item>
         <item>pieces</item>
     </string-array>
+
+    <string-array name="aisles">
+        <item>Seasoning, Condiments, Dressings</item>
+        <item>Meat</item>
+        <item>Carbs</item>
+        <item>Nuts</item>
+        <item>Dairy</item>
+        <item>Fruits and Vegetables</item>
+        <item>Seafood</item>
+        <item>Beverages</item>
+        <item>Others</item>
+
+
+
+
+
+
+    </string-array>
 </resources>

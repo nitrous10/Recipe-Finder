@@ -1,0 +1,51 @@
+<LinearLayout     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="5dp">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/meat"
+            android:scaleType="fitEnd"
+            android:paddingRight="60dp"
+            android:background="@color/white"
+            android:id="@+id/meat_button"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Meat"
+            android:textSize="25sp"
+            android:layout_alignStart="@+id/meat_button"
+            android:layout_marginStart="60dp"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/seasoning"
+        android:scaleType="fitCenter"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"/>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/bread"
+        android:scaleType="fitCenter"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"/>
+
+</LinearLayout>

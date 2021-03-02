@@ -29,4 +29,41 @@ public class Ingredient {
     public String getName() {
         return name;
     }
+
+    /**
+     * @param apiAisle aisle as given by the api
+     * @return aisle defined in our app
+     */
+    private String aisleClassifier(String apiAisle){
+        if (apiAisle.equals("Condiments") || apiAisle.equals("Spices and Seasonings") ||
+                apiAisle.equals("Oil, Vinegar, Salad Dressing")){
+            return "Seasoning, Condiments, Dressings";
+        }
+        else if(apiAisle.equals("Meat")){
+            return apiAisle;
+        }
+        else if(apiAisle.equals("Pasta and Rice") || apiAisle.equals("Bread") ||
+                apiAisle.equals("Bakery/Bread") || apiAisle.equals("Cereal")){
+            return "Carbs";
+        }
+        else if(apiAisle.equals("Nuts") || apiAisle.equals("Nut butters, Jam, and Honey")){
+            return "Nuts";
+        }
+        else if(apiAisle.equals("Milk, Eggs, Other Dairy") || apiAisle.equals("Cheese")){
+            return "Dairy";
+        }
+        else if(apiAisle.equals("Produce") || apiAisle.equals("Dried Fruits")){
+            return "Fruits and Vegetables";
+        }
+        else if(apiAisle.equals("Seafood")){
+            return apiAisle;
+        }
+        else if(apiAisle.equals("Tea and Coffee") || apiAisle.equals("Alcoholic Beverages") ||
+                apiAisle.equals("Beverages")){
+            return "Beverages";
+        }
+        else{
+            return "Others";
+        }
+    }
 }

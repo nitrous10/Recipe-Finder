@@ -110,6 +110,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
                 FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this, ingredientChosen.getName(),
                         Float.parseFloat(input.getText().toString()));
                 // Add units and such later
+                // Add with aisles
             }
         });
 

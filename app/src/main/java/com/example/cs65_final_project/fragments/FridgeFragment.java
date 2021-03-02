@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
@@ -17,18 +20,19 @@ import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.activities.ManualAddIngredientActivity;
 import com.example.cs65_final_project.activities.SearchAddIngredientActivity;
 import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
+import com.example.cs65_final_project.adapters.FridgePagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 
-public class FridgeFragment extends Fragment implements View.OnClickListener{
+public class FridgeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ArrayList<Ingredient> ingredients;
     private FloatingActionButton searchAdd;
     private FloatingActionButton manualAdd;
     private ListView listView;
-
+    private ViewPager viewPager;
 
     public FridgeFragment() {
         // Required empty public constructor
@@ -40,11 +44,20 @@ public class FridgeFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fridge, container, false);
 
-        listView = view.findViewById(R.id.list_fridge);
+//        listView = view.findViewById(R.id.list_fridge);
+        viewPager = view.findViewById(R.id.fridge_view_pager);
         searchAdd = view.findViewById(R.id.search_add_ingredient);
         manualAdd = view.findViewById(R.id.manual_add_ingredient);
         searchAdd.setOnClickListener(this);
         manualAdd.setOnClickListener(this);
+
+        Fragment one = new FridgeCategoryOne();
+        Fragment two = new FridgeCategoryTwo();
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(one);
+        fragments.add(two);
+        FridgePagerAdapter pagerAdapter = new FridgePagerAdapter(getChildFragmentManager(), fragments);
+        viewPager.setAdapter(pagerAdapter);
 
         return view;
     }
@@ -73,12 +86,16 @@ public class FridgeFragment extends Fragment implements View.OnClickListener{
      */
     public void getIngredientList() {
         // Set up the adapter
-        ingredients = new ArrayList<>();
-        FridgeListViewAdapter demoAdapter = new FridgeListViewAdapter(getActivity(), ingredients);
-        listView.setAdapter(demoAdapter);
+//        ingredients = new ArrayList<>();
+//        FridgeListViewAdapter demoAdapter = new FridgeListViewAdapter(getActivity(), ingredients);
+//        listView.setAdapter(demoAdapter);
+
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+//                R.array.aisles, android.R.layout.simple_list_item_1);
+//        listView.setAdapter(adapter);
 
         // Update the adapter with the retrieved ingredients
-        FirebaseDatabaseHelper.getIngredients(ingredients, demoAdapter);
+//        FirebaseDatabaseHelper.getIngredients(ingredients, demoAdapter);
     }
 
     /** Handles onClick for the floating buttons*/
@@ -97,5 +114,10 @@ public class FridgeFragment extends Fragment implements View.OnClickListener{
             Intent intent = new Intent(getActivity(), SearchAddIngredientActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
     }
 }
