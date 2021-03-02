@@ -2,6 +2,7 @@ package com.example.cs65_final_project;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -9,14 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
+import com.example.cs65_final_project.adapters.SearchFriendAdapter;
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -107,6 +112,97 @@ public class FirebaseDatabaseHelper {
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Profile Updated!", Toast.LENGTH_SHORT).show();
                 ((AppCompatActivity)(context)).finish();
+            }
+        });
+    }
+
+    public static ArrayList<String> getFriendSearchResults(String query, SearchFriendAdapter searchFriendAdapter,
+                                                           ArrayList<String> results) {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        ref.child("users").orderByChild("name").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) { // Ensures that there is data to retrieve
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        results.add(data.child("name").getValue(String.class));
+                    }
+                } else {
+                    results.add("No Results");
+                }
+
+                searchFriendAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return results;
+    }
+
+    public static void addFriend(Context context, String name) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child("users").child(auth.getUid()).child("friends").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ref.child("users").child(auth.getUid()).child("friends").child(name).setValue(name);
+                ((AppCompatActivity)(context)).finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static ArrayList<String> getAllFriends(SearchFriendAdapter searchFriendAdapter,
+                                     ArrayList<String> results) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(auth.getUid()).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) { // Ensures that there is data to retrieve
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Log.d("jrv", data.getValue(String.class));
+                        results.add(data.getValue(String.class));
+                    }
+                } else {
+                    results.add("No Results");
+                }
+
+                searchFriendAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return results;
+    }
+
+    public static void removeFriend(Context context, String name) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child("users").child(auth.getUid()).child("friends").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ref.child("users").child(auth.getUid()).child("friends").child(name).removeValue();
+                ((AppCompatActivity)(context)).finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

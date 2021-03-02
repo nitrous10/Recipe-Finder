@@ -57,4 +57,14 @@
     <string name="change_password_here">Change Password Here</string>
     <string name="add_account">Add Account</string>
     <string name="search_title">Search for a recipe</string>
+    <string name="title_activity_search_friends">SearchFriendsActivity</string>
+
+    <string name="friends_list">Your Friends:</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

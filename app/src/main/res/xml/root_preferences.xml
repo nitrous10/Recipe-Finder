@@ -16,6 +16,27 @@
             app:summary="Change account"
             app:key="Accounts"/>
 
+        <Preference
+            android:title="Find your friends!"
+            android:summary="Add Friends">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.cs65_final_project"
+                android:targetClass="com.example.cs65_final_project.activities.SearchFriendsActivity"/>
+
+        </Preference>
+
+        <Preference
+            android:title="Manage your Friends"
+            android:summary="View Friends">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.cs65_final_project"
+                android:targetClass="com.example.cs65_final_project.activities.ViewFriendsActivity"/>
+
+        </Preference>
+
+
         <androidx.preference.PreferenceScreen
             app:title="Logout"
             app:key="Logout"/>
