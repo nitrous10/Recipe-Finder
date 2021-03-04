@@ -17,9 +17,9 @@
                 android:layout_height="100dp"
                 android:src="@drawable/meat"
                 android:scaleType="fitEnd"
-                android:paddingRight="60dp"
+                android:paddingRight="57dp"
                 android:background="@color/white"
-                android:id="@+id/meat_button"/>
+                android:id="@+id/meat_button" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,16 +45,16 @@
                 android:scaleType="fitEnd"
                 android:paddingRight="40dp"
                 android:background="@color/white"
-                android:id="@+id/bread_button"/>
+                android:id="@+id/carbs_button"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Bread"
+                android:text="Carbs"
                 android:textSize="25sp"
-                android:layout_alignStart="@+id/bread_button"
-                android:layout_marginStart="60dp"
+                android:layout_alignStart="@+id/carbs_button"
+                android:layout_marginStart="56dp"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
@@ -94,7 +94,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/seafood"
                 android:scaleType="fitEnd"
-                android:paddingRight="50dp"
+                android:paddingRight="60dp"
                 android:background="@color/white"
                 android:id="@+id/seafood_button"/>
 
@@ -105,7 +105,7 @@
                 android:text="Seafood"
                 android:textSize="25sp"
                 android:layout_alignStart="@+id/seafood_button"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="47dp"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
@@ -130,7 +130,7 @@
                 android:text="Seasoning"
                 android:textSize="25sp"
                 android:layout_alignStart="@+id/seasoning_button"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="38dp"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
@@ -144,7 +144,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/vegetables"
                 android:scaleType="fitEnd"
-                android:paddingRight="40dp"
+                android:paddingRight="38dp"
                 android:background="@color/white"
                 android:id="@+id/vegetables_button"/>
 
@@ -155,7 +155,7 @@
                 android:text="Vegetables"
                 android:textSize="25sp"
                 android:layout_alignStart="@+id/vegetables_button"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="35dp"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
@@ -169,7 +169,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/beverages"
                 android:scaleType="fitEnd"
-                android:paddingRight="55dp"
+                android:paddingRight="60dp"
                 android:background="@color/white"
                 android:id="@+id/beverages_button"/>
 
@@ -194,7 +194,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/nuts"
                 android:scaleType="fitEnd"
-                android:paddingRight="50dp"
+                android:paddingRight="60dp"
                 android:background="@color/white"
                 android:id="@+id/nuts_button"/>
 
@@ -220,7 +220,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/nuts"
                 android:scaleType="fitEnd"
-                android:paddingRight="50dp"
+                android:paddingRight="60dp"
                 android:background="@color/white"
                 android:id="@+id/others_button"/>
 
@@ -231,7 +231,7 @@
                 android:text="Others"
                 android:textSize="25sp"
                 android:layout_alignStart="@+id/others_button"
-                android:layout_marginStart="70dp"
+                android:layout_marginStart="60dp"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
