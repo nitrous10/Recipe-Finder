@@ -12,7 +12,7 @@ public class Ingredient {
     public Ingredient(String name, float amount, String aisle){
         this.name = name;
         this.amount = amount;
-        this.aisle = aisle;
+        this.aisle = aisleClassifier(aisle);
     }
 
     public Ingredient(String name, float amount){
