@@ -132,7 +132,7 @@ public class FridgeFragment extends Fragment implements View.OnClickListener {
         } else if(id == R.id.seafood_button){
             aisle = FridgeCategorySelectedFragment.SEAFOOD;
         } else if(id == R.id.vegetables_button){
-            aisle = FridgeCategorySelectedFragment.VEGETABLES;
+            aisle = FridgeCategorySelectedFragment.PRODUCE;
         } else if(id == R.id.beverages_button){
             aisle = FridgeCategorySelectedFragment.BEVERAGES;
         } else if(id == R.id.nuts_button){

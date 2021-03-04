@@ -108,7 +108,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
                 EditText input = dialogView.findViewById(R.id.input);
                 input.setInputType(InputType.TYPE_CLASS_PHONE);
                 FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this, ingredientChosen.getName(),
-                        Float.parseFloat(input.getText().toString()));
+                        Float.parseFloat(input.getText().toString()), ingredientChosen.getAisle());
                 // Add units and such later
                 // Add with aisles
             }

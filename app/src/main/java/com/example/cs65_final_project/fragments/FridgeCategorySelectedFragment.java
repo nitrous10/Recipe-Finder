@@ -30,7 +30,7 @@ public class FridgeCategorySelectedFragment extends Fragment {
     public static final String DAIRY = "Dairy";
     public static final String SEAFOOD = "Seafood";
     public static final String SEASONING = "Seasoning";
-    public static final String VEGETABLES = "Vegetables";
+    public static final String PRODUCE = "Produce";
     public static final String BEVERAGES = "Beverages";
     public static final String NUTS = "Nuts";
     public static final String OTHERS = "Others";
@@ -79,24 +79,6 @@ public class FridgeCategorySelectedFragment extends Fragment {
         FridgeListViewAdapter demoAdapter = new FridgeListViewAdapter(getActivity(), ingredients);
         listView.setAdapter(demoAdapter);
 
-        if(aisleSelected.equals(MEAT)){
-
-        } else if(aisleSelected.equals(CARBS)){
-
-        } else if(aisleSelected.equals(DAIRY)){
-
-        } else if(aisleSelected.equals(SEAFOOD)){
-
-        } else if(aisleSelected.equals(SEASONING)){
-
-        } else if(aisleSelected.equals(VEGETABLES)){
-
-        } else if(aisleSelected.equals(BEVERAGES)){
-
-        } else if(aisleSelected.equals(NUTS)){
-
-        } else if(aisleSelected.equals(OTHERS)){
-
-        }
+        FirebaseDatabaseHelper.getFridgeCategory(aisleSelected, ingredients, demoAdapter);
     }
 }

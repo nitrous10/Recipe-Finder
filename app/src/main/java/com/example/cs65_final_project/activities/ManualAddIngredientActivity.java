@@ -42,7 +42,7 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
         if(view.getId() == R.id.save_button){
             try {
                 // Add the ingredient to Firebase
-                FirebaseDatabaseHelper.addIngredient(this, ingredientEditText.getText().toString(), Float.parseFloat(amountEditText.getText().toString()));
+                FirebaseDatabaseHelper.addIngredient(this, ingredientEditText.getText().toString(), Float.parseFloat(amountEditText.getText().toString()), "Others");
             } catch (Exception e) {
                 Toast.makeText(this, "Invalid Entry", Toast.LENGTH_SHORT).show();
             }

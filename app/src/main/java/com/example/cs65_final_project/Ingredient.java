@@ -37,7 +37,7 @@ public class Ingredient {
     private String aisleClassifier(String apiAisle){
         if (apiAisle.equals("Condiments") || apiAisle.equals("Spices and Seasonings") ||
                 apiAisle.equals("Oil, Vinegar, Salad Dressing")){
-            return "Seasoning, Condiments, Dressings";
+            return "Seasoning";
         }
         else if(apiAisle.equals("Meat")){
             return apiAisle;
@@ -53,7 +53,7 @@ public class Ingredient {
             return "Dairy";
         }
         else if(apiAisle.equals("Produce") || apiAisle.equals("Dried Fruits")){
-            return "Fruits and Vegetables";
+            return "Produce";
         }
         else if(apiAisle.equals("Seafood")){
             return apiAisle;
