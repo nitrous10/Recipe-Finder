@@ -33,6 +33,8 @@ public class SearchIngredientAdapter extends ArrayAdapter<Ingredient> {
         //Get ingredient names
         TextView ingredientText = convertView.findViewById(R.id.ingredient_name);
         ingredientText.setText(ingredient.getName());
+        TextView aisleText = convertView.findViewById(R.id.aisle);
+        aisleText.setText(ingredient.getAisle());
 
         return convertView;
     }

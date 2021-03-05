@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_back"
+        android:id="@+id/back_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aisle_name"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:id="@+id/aisle_title"
+        android:layout_centerVertical="true"
+        android:layout_above="@+id/list_fridge"
+        android:layout_alignParentTop="true"
+        android:gravity="center"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_fridge"
+        android:layout_below="@+id/back_button"/>
+
+</RelativeLayout>

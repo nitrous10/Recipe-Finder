@@ -38,7 +38,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
     private Handler resultsHandler;
     private SearchIngredientAdapter adapter;
 
-    public static final int RESULT_NUM = 10;
+    public static final int RESULT_NUM = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
             @Override
             public void run() {
                 try {
-                    results = controller.getIngredients(s, RESULT_NUM);
+                    results = controller.getIngredients(s, RESULT_NUM, true);
                 } catch (SpoonacularException e) {
                     e.printStackTrace();
                 }
@@ -108,8 +108,9 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
                 EditText input = dialogView.findViewById(R.id.input);
                 input.setInputType(InputType.TYPE_CLASS_PHONE);
                 FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this, ingredientChosen.getName(),
-                        Float.parseFloat(input.getText().toString()));
+                        Float.parseFloat(input.getText().toString()), ingredientChosen.getAisle());
                 // Add units and such later
+                // Add with aisles
             }
         });
 

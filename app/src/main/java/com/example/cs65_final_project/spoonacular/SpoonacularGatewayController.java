@@ -38,9 +38,9 @@ public class SpoonacularGatewayController {
         return recipe.getTitle().toLowerCase().contains(searchQuery);
     }
 
-    public List<Ingredient> getIngredients(String query,
-                                           int numOfResults) throws SpoonacularException {
-        return toIngredients(mClient.getIngredients(query, numOfResults));
+    public List<Ingredient> getIngredients(String query, int numOfResults,
+                                           boolean metaInfo) throws SpoonacularException {
+        return toIngredients(mClient.getIngredients(query, numOfResults, metaInfo));
     }
 
     private List<Ingredient> toIngredients(List<SpoonacularIngredient> ingredients) {
@@ -68,6 +68,6 @@ public class SpoonacularGatewayController {
 
     // TODO: Time?
     private Ingredient toIngredient(SpoonacularIngredient ingredient) {
-        return new Ingredient(ingredient.getName(), 1.0f);
+        return new Ingredient(ingredient.getName(), 1.0f, ingredient.getAisle());
     }
 }

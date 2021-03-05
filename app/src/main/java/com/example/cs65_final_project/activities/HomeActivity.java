@@ -72,4 +72,20 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         }
         return false;
     }
+
+
+    /** Mainly overrides for animation in fridge */
+    @Override
+    public void onBackPressed() {
+        FridgeFragment fridge = (FridgeFragment) getSupportFragmentManager().findFragmentByTag(FRIDGE_TAG);
+        if(fridge != null && fridge.categorySelected()){
+            fridge.runBackAnimation(); // Run slide animation
+        }
+        else if(fridge != null){
+            // Do nothing if fridge fragment, but category is not selected
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
 }

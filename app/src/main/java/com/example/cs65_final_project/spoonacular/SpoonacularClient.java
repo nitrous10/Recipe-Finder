@@ -38,23 +38,26 @@ class SpoonacularClient {
                 .build();
     }
 
+
     /**
      * Fetch a list of possible ingredients based on the provided query.
      *
      * @param query search query provided to find ingredients
      * @param numOfResults the number of ingredients to return
+     * @param metaInfo true if want additional info like aisle
      * @return list of ingredients
      * @throws SpoonacularException if we fail to successfully retrieve and parse the list of
      *                              ingredients from the Spoonacular API
      */
-    public List<SpoonacularIngredient> getIngredients(final String query,
-                                                      final int numOfResults) throws SpoonacularException {
+    public List<SpoonacularIngredient> getIngredients(final String query, final int numOfResults,
+                                                      final boolean metaInfo) throws SpoonacularException {
         Request request = new Request.Builder()
                 .url(HttpUrl.parse(BASE_URL + "/food/ingredients/autocomplete")
                         .newBuilder()
                         .addQueryParameter("apiKey", API_KEY)
                         .addQueryParameter("query", query)
                         .addQueryParameter("number", String.valueOf(numOfResults))
+                        .addQueryParameter("metaInformation", String.valueOf(metaInfo))
                         .build())
                 .build();
 
