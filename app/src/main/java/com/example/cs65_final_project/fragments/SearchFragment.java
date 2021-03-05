@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.Recipe;
 import com.example.cs65_final_project.activities.RecipeViewActivity;
@@ -55,6 +56,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
 
         ListView listView = view.findViewById(R.id.recipe_list_view);
         listView.setAdapter(mSuggestedRecipeAdapter);
+        listView.setOnItemClickListener(this);
 
         SearchView searchView = (SearchView) view.findViewById(R.id.recipe_search_view);
         searchView.setOnQueryTextListener(this);
@@ -67,8 +69,19 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
         Intent intent = new Intent(getActivity(), RecipeViewActivity.class);
+
+        Recipe recipe = mRecipes.get(pos);
+        intent.putExtra("title", recipe.getName());
+        intent.putExtra("time", recipe.getTime());
+        intent.putExtra("ingredients",
+                recipe.getIngredients()
+                        .stream()
+                        .map(Ingredient::getName)
+                        .toArray(String[]::new));
+        intent.putExtra("steps", recipe.getSteps().toArray(new String[0]));
+
         startActivity(intent);
     }
 

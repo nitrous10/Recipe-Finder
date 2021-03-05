@@ -8,8 +8,9 @@ import java.util.List;
 class SpoonacularRecipe {
 
     private String title;
-    private List<SpoonacularRecipeIngredient> usedIngredients;
-    private List<SpoonacularRecipeIngredient> missedIngredients;
+    private List<SpoonacularRecipeIngredient> extendedIngredients;
+    private List<SpoonacularRecipeInstructions> analyzedInstructions;
+    private int readyInMinutes;
 
     String getTitle() {
         return title;
@@ -19,19 +20,27 @@ class SpoonacularRecipe {
         this.title = title;
     }
 
-    List<SpoonacularRecipeIngredient> getUsedIngredients() {
-        return usedIngredients;
+    public List<SpoonacularRecipeIngredient> getExtendedIngredients() {
+        return extendedIngredients;
     }
 
-    void setUsedIngredients(List<SpoonacularRecipeIngredient> usedIngredients) {
-        this.usedIngredients = usedIngredients;
+    public void setExtendedIngredients(List<SpoonacularRecipeIngredient> extendedIngredients) {
+        this.extendedIngredients = extendedIngredients;
     }
 
-    List<SpoonacularRecipeIngredient> getMissedIngredients() {
-        return missedIngredients;
+    public List<SpoonacularRecipeInstructions> getAnalyzedInstructions() {
+        return analyzedInstructions;
     }
 
-    void setMissedIngredients(List<SpoonacularRecipeIngredient> missedIngredients) {
-        this.missedIngredients = missedIngredients;
+    public void setAnalyzedInstructions(List<SpoonacularRecipeInstructions> analyzedInstructions) {
+        this.analyzedInstructions = analyzedInstructions;
+    }
+
+    public int getReadyInMinutes() {
+        return readyInMinutes;
+    }
+
+    public void setReadyInMinutes(int readyInMinutes) {
+        this.readyInMinutes = readyInMinutes;
     }
 }

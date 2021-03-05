@@ -27,10 +27,10 @@ class SpoonacularClient {
     // TODO: Make this more secure?
     private final static String API_KEY = "bd80ef59d3274d0c8efc90e844ff81c7";
 
-    private final OkHttpClient client;
+    private final OkHttpClient mClient;
 
     public SpoonacularClient() {
-        this.client = new OkHttpClient()
+        this.mClient = new OkHttpClient()
                 .newBuilder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
@@ -61,7 +61,7 @@ class SpoonacularClient {
                         .build())
                 .build();
 
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = mClient.newCall(request).execute()) {
             String body = response.body().string();
             SpoonacularIngredient[] ingredients =
                     (new Gson()).fromJson(body, SpoonacularIngredient[].class);
@@ -82,8 +82,8 @@ class SpoonacularClient {
      * @throws SpoonacularException if we fail to successfully retrieve and parse the list of
      *                              recipes from the Spoonacular API
      */
-    public List<SpoonacularRecipe> getRecipes(List<String> ingredients,
-                                              int numOfResults) throws SpoonacularException {
+    public List<SpoonacularSearchRecipe> searchRecipes(List<String> ingredients,
+                                                       int numOfResults) throws SpoonacularException {
         Request request = new Request.Builder()
                 .url(HttpUrl.parse(BASE_URL + "/recipes/findByIngredients")
                         .newBuilder()
@@ -94,7 +94,35 @@ class SpoonacularClient {
                         .build())
                 .build();
 
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = mClient.newCall(request).execute()) {
+            SpoonacularSearchRecipe[] recipes =
+                    (new Gson()).fromJson(response.body().string(), SpoonacularSearchRecipe[].class);
+
+            return Arrays.asList(recipes);
+        } catch (IOException e) {
+            Log.e("RecipeFinder", e.getMessage());
+            throw new SpoonacularException("Couldn't communicate with the kitchen. Please try again!");
+        }
+    }
+
+    /**
+     * Fetch the recipes associated with the provided ids.
+     *
+     * @param ids the IDs of the recipes to fetch
+     * @return list of recipes
+     * @throws SpoonacularException if we fail to successfully retrieve and parse the list of
+     *                              recipes from the Spoonacular API
+     */
+    public List<SpoonacularRecipe> getRecipes(List<Long> ids) throws SpoonacularException {
+        Request request = new Request.Builder()
+                .url(HttpUrl.parse(BASE_URL + "/recipes/informationBulk")
+                        .newBuilder()
+                        .addQueryParameter("apiKey", API_KEY)
+                        .addQueryParameter("ids", StringUtils.join(ids, ","))
+                        .build())
+                .build();
+
+        try (Response response = mClient.newCall(request).execute()) {
             SpoonacularRecipe[] recipes =
                     (new Gson()).fromJson(response.body().string(), SpoonacularRecipe[].class);
 
