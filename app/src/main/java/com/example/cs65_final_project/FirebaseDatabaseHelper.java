@@ -2,7 +2,6 @@ package com.example.cs65_final_project;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -11,19 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
 import com.example.cs65_final_project.adapters.SearchFriendAdapter;
-import com.firebase.ui.database.FirebaseListAdapter;
+import com.example.cs65_final_project.listeners.GetIngredientsListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class FirebaseDatabaseHelper {
 
@@ -58,29 +55,25 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    /**
-     * Gets all of the ingredients in a user's fridge
-     * @param ingredients
-     * @param fridgeListViewAdapter
-     */
-    public static void getIngredients(ArrayList<Ingredient> ingredients, FridgeListViewAdapter fridgeListViewAdapter) {
+    public static void getIngredients(List<Ingredient> ingredients, GetIngredientsListener listener) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        ref.child("users").child(auth.getUid()).child("fridge").addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).child("fridge")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) { // Ensures that there is data to retrieve
-                    for (DataSnapshot data : snapshot.getChildren()) { // Loops through each ingredient in the fridge
-                        ingredients.add(new Ingredient(data.getKey(), data.getValue(Float.class)));
-                    }
-                    fridgeListViewAdapter.notifyDataSetChanged(); // Update the adapter to display all retrieved ingredients
-                    Log.d("RecipeFinderDatabase", "Retrieved Fridge");
+                if (snapshot.exists()) {
+                    snapshot.getChildren().forEach(category ->
+                            category.getChildren().forEach(ingredient ->
+                                    ingredients.add(new Ingredient(
+                                            ingredient.getKey(),    // name
+                                            ingredient.getValue(Float.class)))));   // amount
+                    listener.setReady(true);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

@@ -21,11 +21,10 @@ import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.Recipe;
 import com.example.cs65_final_project.activities.RecipeViewActivity;
 import com.example.cs65_final_project.adapters.SuggestedRecipeAdapter;
-import com.example.cs65_final_project.exceptions.SpoonacularException;
-import com.example.cs65_final_project.spoonacular.SpoonacularGatewayController;
+import com.example.cs65_final_project.controllers.RecipeSearchController;
+import com.example.cs65_final_project.exceptions.RecipeSearchException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SearchFragment extends Fragment implements AdapterView.OnItemClickListener,
@@ -36,9 +35,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
     private final List<Recipe> mRecipes = new ArrayList<>();
     private SuggestedRecipeAdapter mSuggestedRecipeAdapter;
 
-    // TODO: Should be in RecipeSearchController
-    private final SpoonacularGatewayController mSpoonacularGatewayController =
-            new SpoonacularGatewayController();
+    private final RecipeSearchController mRecipeSearchController = new RecipeSearchController();
 
     private ProgressBar mSearchProgressBar;
 
@@ -104,11 +101,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
                     mSearchProgressBar.setVisibility(ProgressBar.VISIBLE);
                 });
 
-                List<Recipe> recipes = mSpoonacularGatewayController.getRecipes(
-                        query,
-                        // TODO: Use ingredients in fridge
-                        Arrays.asList("blueberry","banana","sugar","eggs","milk"),
-                        numOfResults);
+                List<Recipe> recipes = mRecipeSearchController.getRecipes(query, numOfResults);
 
                 mRecipes.clear();
                 mRecipes.addAll(recipes);
@@ -116,7 +109,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
                     mSearchProgressBar.setVisibility(ProgressBar.INVISIBLE);
                     mSuggestedRecipeAdapter.notifyDataSetChanged();
                 });
-            } catch (SpoonacularException e) {
+            } catch (RecipeSearchException e) {
                 getActivity().runOnUiThread(() -> {
                     mSearchProgressBar.setVisibility(ProgressBar.INVISIBLE);
                     Toast.makeText(getActivity(), "Failed to get recipes!", Toast.LENGTH_LONG)
