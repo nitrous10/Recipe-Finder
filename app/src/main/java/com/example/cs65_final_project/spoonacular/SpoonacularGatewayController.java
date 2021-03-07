@@ -61,6 +61,7 @@ public class SpoonacularGatewayController {
     private Recipe toRecipe(SpoonacularRecipe spoonacularRecipe) {
         return new Recipe(
                 spoonacularRecipe.getTitle(),
+                spoonacularRecipe.getImage(),
                 spoonacularRecipe.getExtendedIngredients()
                         .stream()
                         .map(this::toIngredient)
