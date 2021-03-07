@@ -71,6 +71,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
 
         Recipe recipe = mRecipes.get(pos);
         intent.putExtra("title", recipe.getName());
+        intent.putExtra("imageUrl", recipe.getImageUrl());
         intent.putExtra("time", recipe.getTime());
         intent.putExtra("ingredients",
                 recipe.getIngredients()
