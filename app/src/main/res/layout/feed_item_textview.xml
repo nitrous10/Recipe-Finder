@@ -9,15 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Loading"
+        android:textColor="@color/brick_red"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:id="@+id/postTitle"/>
+        android:id="@+id/feedTitle"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Loading"
-        android:id="@+id/postRecipe">
+        android:id="@+id/feedTime">
 
     </TextView>
 
@@ -26,7 +27,26 @@
         android:layout_height="wrap_content"
         android:text="Loading"
         android:layout_marginTop="7dp"
-        android:id="@+id/postComments">
+        android:id="@+id/feedIngredients">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading"
+        android:layout_marginTop="7dp"
+        android:id="@+id/feedSteps">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading"
+        android:textColor="@color/brick_red"
+        android:layout_marginTop="7dp"
+        android:id="@+id/feedComments">
 
     </TextView>
 
@@ -36,6 +56,6 @@
         android:text="Loading"
         android:textStyle="italic"
         android:textSize="10sp"
-        android:id="@+id/postCreator"/>
+        android:id="@+id/feedCreator"/>
 
 </LinearLayout>

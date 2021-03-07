@@ -232,12 +232,33 @@ public class FirebaseDatabaseHelper {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         String stringPost = data.getValue(String.class);
-                        Post post = Post.parsePost(context, stringPost);
-                        posts.add(post);
+                        String time = data.getKey();
+                        Post post = Post.parsePost(context, stringPost, time);
+                        posts.add(0, post);
                     }
                     feedListViewAdapter.notifyDataSetChanged();
                 } else {
-                    posts.add(new Post("Nothing to show!", "", "", ""));
+                    posts.add(new Post("Nothing to show!", "", "", "", "", ""));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static void post(String title, String time, String ingredients, String steps, String comments) {
+        long postTime = System.currentTimeMillis();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(auth.getUid()).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String[] followers = snapshot.getValue(String.class).split(";");
+                for (String follower : followers) {
+                    ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
                 }
             }
 

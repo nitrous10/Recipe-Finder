@@ -14,6 +14,7 @@ import com.example.cs65_final_project.Post;
 import com.example.cs65_final_project.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FeedListViewAdapter extends ArrayAdapter<Post> {
 
@@ -29,15 +30,19 @@ public class FeedListViewAdapter extends ArrayAdapter<Post> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_item_textview, parent, false);
         }
 
-        TextView postTitle = convertView.findViewById(R.id.postTitle);
-        TextView postCreator = convertView.findViewById(R.id.postCreator);
-        TextView postRecipe = convertView.findViewById(R.id.postRecipe);
-        TextView postComments = convertView.findViewById(R.id.postComments);
+        TextView feedTitle = convertView.findViewById(R.id.feedTitle);
+        TextView feedCreator = convertView.findViewById(R.id.feedCreator);
+        TextView feedTime = convertView.findViewById(R.id.feedTime);
+        TextView feedComments = convertView.findViewById(R.id.feedComments);
+        TextView feedSteps = convertView.findViewById(R.id.feedSteps);
+        TextView feedIngredients = convertView.findViewById(R.id.feedIngredients);
 
-        postTitle.setText(post.getPostTitle());
-        postCreator.setText(post.getPostCreator());
-        postRecipe.setText(post.getPostRecipe());
-        postComments.setText(post.getPostComments());
+        feedTitle.setText(post.getPostTitle());
+        feedCreator.setText(post.getPostCreator());
+        feedTime.setText(post.getPostTime());
+        feedSteps.setText(post.getPostSteps());
+        feedIngredients.setText(post.getPostIngredients());
+        feedComments.setText("Comments: " + post.getPostComments());
 
         return convertView;
     }

@@ -1,15 +1,18 @@
 package com.example.cs65_final_project;
 
 import android.content.Context;
+import android.util.Log;
 
 public class Post {
 
-    private String postTitle, postCreator, postRecipe, postComments;
+    private String postTitle, postCreator, postTime, postComments, postIngredients, postSteps;
 
-    public Post(String title, String creator, String recipe, String comments) {
+    public Post(String title, String time, String ingredients, String steps, String comments, String creator) {
         postTitle = title;
         postCreator = creator;
-        postRecipe = recipe;
+        postTime = time;
+        postSteps = steps;
+        postIngredients = ingredients;
         postComments = comments;
     }
 
@@ -21,16 +24,25 @@ public class Post {
         return postCreator;
     }
 
-    public String getPostRecipe() {
-        return postRecipe;
+    public String getPostTime() {
+        return postTime;
+    }
+
+    public String getPostIngredients() {
+        return postIngredients;
+    }
+
+    public String getPostSteps() {
+        return postSteps;
     }
 
     public String getPostComments() {
         return postComments;
     }
 
-    public static Post parsePost(Context context, String stringPost) {
-        String[] postComponents = stringPost.split(context.getString(R.string.postComponentSeparator));
-        return new Post(postComponents[0], postComponents[1], postComponents[2], postComponents[3]);
+    public static Post parsePost(Context context, String stringPost, String time) {
+        String[] postComponents = stringPost.split("\\$\\$%%\\$%\\$");
+        Log.d("Recipe Finder", stringPost);
+        return new Post(postComponents[0], postComponents[1], postComponents[2], postComponents[3], postComponents[4], postComponents[5]);
     }
 }

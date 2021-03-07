@@ -7,9 +7,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.R;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,7 +63,11 @@ public class CreatePost extends AppCompatActivity implements View.OnClickListene
         if (v.getId() == R.id.postCancel) {
             finish();
         } else if (v.getId() == R.id.postConfirm) {
-            
+            if (commentEditText.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Enter a Comment!", Toast.LENGTH_SHORT).show();
+            } else {
+                FirebaseDatabaseHelper.post(title, time, ingredients, steps, commentEditText.getText().toString());
+            }
         }
     }
 
