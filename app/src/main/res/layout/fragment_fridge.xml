@@ -27,7 +27,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_arrow_forward"
             android:contentDescription="@string/add_ingredient"
             android:layout_margin="16dp"
             android:id="@+id/manual_add_ingredient" />

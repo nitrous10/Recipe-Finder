@@ -24,7 +24,7 @@ public class FeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         listView = view.findViewById(R.id.feed_List_View);
 
-        posts = new ArrayList<>();
+        posts = new ArrayList<Post>();
         FeedListViewAdapter feedAdapter = new FeedListViewAdapter(getActivity(), posts);
         listView.setAdapter(feedAdapter);
 

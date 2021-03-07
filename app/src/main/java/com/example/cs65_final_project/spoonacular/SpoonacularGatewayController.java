@@ -8,7 +8,6 @@ import com.example.cs65_final_project.exceptions.SpoonacularException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Controller acting as a gateway to the Spoonacular client.
@@ -24,10 +23,23 @@ public class SpoonacularGatewayController {
     public List<Recipe> getRecipes(@Nullable String searchQuery,
                                    List<String> ingredients,
                                    int numOfResults) throws SpoonacularException {
-        List<SpoonacularRecipe> spoonacularRecipes = mClient.getRecipes(ingredients, numOfResults);
+        List<SpoonacularSearchRecipe> spoonacularSearchRecipes =
+                mClient.searchRecipes(ingredients, numOfResults);
+        List<SpoonacularRecipe> spoonacularRecipes = mClient.getRecipes(
+                spoonacularSearchRecipes.stream()
+                        .map(SpoonacularSearchRecipe::getId)
+                        .collect(Collectors.toList()));
+
         return toRecipes(spoonacularRecipes.stream()
                 .filter(recipe -> matchesSearchQuery(recipe, searchQuery))
+                .filter(recipe -> !recipe.getAnalyzedInstructions().isEmpty())
                 .collect(Collectors.toList()));
+    }
+
+    public List<Ingredient> getIngredients(String query,
+                                           int numOfResults,
+                                           boolean metaInfo) throws SpoonacularException {
+        return toIngredients(mClient.getIngredients(query, numOfResults, metaInfo));
     }
 
     private boolean matchesSearchQuery(SpoonacularRecipe recipe, @Nullable String searchQuery) {
@@ -36,11 +48,6 @@ public class SpoonacularGatewayController {
         }
 
         return recipe.getTitle().toLowerCase().contains(searchQuery);
-    }
-
-    public List<Ingredient> getIngredients(String query, int numOfResults,
-                                           boolean metaInfo) throws SpoonacularException {
-        return toIngredients(mClient.getIngredients(query, numOfResults, metaInfo));
     }
 
     private List<Ingredient> toIngredients(List<SpoonacularIngredient> ingredients) {
@@ -54,19 +61,25 @@ public class SpoonacularGatewayController {
     private Recipe toRecipe(SpoonacularRecipe spoonacularRecipe) {
         return new Recipe(
                 spoonacularRecipe.getTitle(),
-                Stream.concat(spoonacularRecipe.getUsedIngredients().stream(),
-                        spoonacularRecipe.getMissedIngredients().stream())
+                spoonacularRecipe.getImage(),
+                spoonacularRecipe.getExtendedIngredients()
+                        .stream()
                         .map(this::toIngredient)
                         .collect(Collectors.toList()),
-                30);
+                spoonacularRecipe.getAnalyzedInstructions()
+                        .stream()
+                        .flatMap(instructions -> instructions.getSteps().stream())
+                        .map(SpoonacularRecipeInstructionsStep::getStep)
+                        .collect(Collectors.toList()),
+                spoonacularRecipe.getReadyInMinutes());
     }
 
-    // TODO: Time?
+    // TODO: Amount?
     private Ingredient toIngredient(SpoonacularRecipeIngredient ingredient) {
         return new Ingredient(ingredient.getOriginal(), 1.0f);
     }
 
-    // TODO: Time?
+    // TODO: Amount?
     private Ingredient toIngredient(SpoonacularIngredient ingredient) {
         return new Ingredient(ingredient.getName(), 1.0f, ingredient.getAisle());
     }
