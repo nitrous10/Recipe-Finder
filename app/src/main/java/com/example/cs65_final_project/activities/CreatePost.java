@@ -66,7 +66,7 @@ public class CreatePost extends AppCompatActivity implements View.OnClickListene
             if (commentEditText.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Enter a Comment!", Toast.LENGTH_SHORT).show();
             } else {
-                FirebaseDatabaseHelper.post(title, time, ingredients, steps, commentEditText.getText().toString());
+                FirebaseDatabaseHelper.post(this, title, time, ingredients, steps, commentEditText.getText().toString());
             }
         }
     }

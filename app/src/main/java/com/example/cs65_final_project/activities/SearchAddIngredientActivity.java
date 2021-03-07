@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -26,17 +27,20 @@ import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.adapters.SearchIngredientAdapter;
 import com.example.cs65_final_project.exceptions.SpoonacularException;
 import com.example.cs65_final_project.spoonacular.SpoonacularGatewayController;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAddIngredientActivity extends AppCompatActivity implements ListView.OnItemClickListener,
-        SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener, View.OnClickListener {
 
     private List<Ingredient> results;
     private SpoonacularGatewayController controller;
     private Handler resultsHandler;
     private SearchIngredientAdapter adapter;
+
+    private FloatingActionButton backButton;
 
     public static final int RESULT_NUM = 5;
 
@@ -45,6 +49,9 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_add_ingredient);
         setTitle("Search to add Ingredient");
+
+        backButton = findViewById(R.id.leave_ingredient);
+        backButton.setOnClickListener(this);
 
         controller = new SpoonacularGatewayController();
         results = new ArrayList<>();
@@ -115,5 +122,11 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
         });
 
         dialog.show();
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.leave_ingredient) {
+            finish();
+        }
     }
 }

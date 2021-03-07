@@ -249,7 +249,7 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public static void post(String title, String time, String ingredients, String steps, String comments) {
+    public static void post(Context context, String title, String time, String ingredients, String steps, String comments) {
         long postTime = System.currentTimeMillis();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -260,6 +260,8 @@ public class FirebaseDatabaseHelper {
                 for (String follower : followers) {
                     ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
                 }
+                Toast.makeText(context, "Post Created!", Toast.LENGTH_SHORT).show();
+                ((AppCompatActivity)(context)).finish();
             }
 
             @Override

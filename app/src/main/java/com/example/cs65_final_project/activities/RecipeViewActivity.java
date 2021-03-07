@@ -2,6 +2,7 @@ package com.example.cs65_final_project.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 public class RecipeViewActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private FloatingActionButton shareButton;
+    private FloatingActionButton backButton, shareButton;
     private TextView titleTextView, timeTextView, ingredientsTextView, stepsTextView;
 
     @Override
@@ -23,7 +24,9 @@ public class RecipeViewActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_recipe_view);
         setTitle("Recipe");
 
+        backButton = findViewById(R.id.leave_recipe);
         shareButton = findViewById(R.id.share_recipe);
+        backButton.setOnClickListener(this);
         shareButton.setOnClickListener(this);
 
         ImageView imageView = findViewById(R.id.recipe_view_image);
@@ -69,6 +72,9 @@ public class RecipeViewActivity extends AppCompatActivity implements View.OnClic
             intent.putExtra(CreatePost.INGREDIENT_KEY, ingredientsTextView.getText().toString());
             intent.putExtra(CreatePost.STEPS_KEY, stepsTextView.getText().toString());
             startActivity(intent);
+        } else if (v.getId() == R.id.leave_recipe) {
+            Log.d("Recipe Finder", "Finished");
+            finish();
         }
     }
 }
