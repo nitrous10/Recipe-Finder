@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cs65_final_project.adapters.FeedListViewAdapter;
 import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
 import com.example.cs65_final_project.adapters.SearchFriendAdapter;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -220,6 +221,31 @@ public class FirebaseDatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ref.child("users").child(auth.getUid()).child("friends").child(name).removeValue();
                 ((AppCompatActivity)(context)).finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static void getFeed(Context context, ArrayList<Post> posts, FeedListViewAdapter feedListViewAdapter) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(auth.getUid()).child("feed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        String stringPost = data.getValue(String.class);
+                        Post post = Post.parsePost(context, stringPost);
+                        posts.add(post);
+                    }
+                    feedListViewAdapter.notifyDataSetChanged();
+                } else {
+                    posts.add(new Post("Nothing to show!", "", "", ""));
+                }
             }
 
             @Override
