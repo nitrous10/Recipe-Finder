@@ -300,22 +300,24 @@ public class FirebaseDatabaseHelper {
         return results;
     }
 
-    public static ArrayList<String> getAllPosts(SearchFriendAdapter searchFriendAdapter,
-                                                  ArrayList<String> results) {
+    public static ArrayList<Post> getAllPosts(Context context, FeedListViewAdapter feedListViewAdapter,
+                                                  ArrayList<Post> results) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("users").child(auth.getUid()).child("posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) { // Ensures that there is data to retrieve
+                if (snapshot.hasChildren()) {
                     for (DataSnapshot data : snapshot.getChildren()) {
-                        results.add(data.getValue(String.class));
+                        String stringPost = data.getValue(String.class);
+                        String time = data.getKey();
+                        Post post = Post.parsePost(context, stringPost, time);
+                        results.add(0, post);
                     }
+                    feedListViewAdapter.notifyDataSetChanged();
                 } else {
-                    results.add("No Posts");
+                    results.add(new Post("Nothing to show!", "", "", "", "", ""));
                 }
-
-                searchFriendAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -434,8 +436,11 @@ public class FirebaseDatabaseHelper {
         ref.child("users").child(auth.getUid()).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String[] followers = snapshot.getValue(String.class).split(";");
+                Log.d("jrv", snapshot.getValue().toString());
+                String[] followers = snapshot.getValue().toString().replace("{","")
+                        .replace("}", "").split("=");
                 for (String follower : followers) {
+                    Log.d("follower", follower);
                     ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
                 }
                 ref.child("users").child(auth.getUid()).child("posts").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
