@@ -23,24 +23,4 @@
 
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory app:title="Recipes">
-
-        <androidx.preference.PreferenceScreen
-            app:key="Allergies"
-            app:title="Allergies"
-            app:summary="Select allergies to filter"
-            app:dialogTitle="Select allergies">
-        </androidx.preference.PreferenceScreen>
-
-        <androidx.preference.ListPreference
-            app:key="units"
-            app:title="Units"
-            app:entryValues="@array/units"
-            app:entries="@array/units"
-            app:summary="Choose units from imperial or metric"
-            app:dialogTitle="Unit Preference"
-            />
-
-    </androidx.preference.PreferenceCategory>
-
 </androidx.preference.PreferenceScreen>

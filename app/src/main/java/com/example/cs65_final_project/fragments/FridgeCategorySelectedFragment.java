@@ -1,11 +1,13 @@
 package com.example.cs65_final_project.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,11 +21,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.R;
+import com.example.cs65_final_project.activities.ManualAddIngredientActivity;
 import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
 
 import java.util.ArrayList;
 
-public class FridgeCategorySelectedFragment extends Fragment {
+public class FridgeCategorySelectedFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     public static final String CATEGORY_KEY = "category key";
     public static final String MEAT = "Meat";
@@ -49,6 +52,7 @@ public class FridgeCategorySelectedFragment extends Fragment {
 
         ingredients = new ArrayList<>();
         listView = view.findViewById(R.id.list_fridge);
+        listView.setOnItemClickListener(this);
 
         Bundle bundle = getArguments();
         aisleSelected = bundle.getString(CATEGORY_KEY);
@@ -76,9 +80,6 @@ public class FridgeCategorySelectedFragment extends Fragment {
         ft.replace(R.id.current_fridge, categories).commit();
     }
 
-    /**
-     * TODO: update the ingredient list according to the aisle/category selected from firebase
-     */
     public void getIngredientList() {
         //Set up the adapter
         ingredients = new ArrayList<>();
@@ -86,6 +87,24 @@ public class FridgeCategorySelectedFragment extends Fragment {
         listView.setAdapter(demoAdapter);
 
         FirebaseDatabaseHelper.getFridgeCategory(aisleSelected, ingredients, demoAdapter);
-        Log.d("debug", String.valueOf(ingredients));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getIngredientList();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Ingredient ingredient = (Ingredient)adapterView.getItemAtPosition(i);
+
+        Intent intent = new Intent(getActivity(), ManualAddIngredientActivity.class);
+
+        intent.putExtra(ManualAddIngredientActivity.AMOUNT_KEY, ingredient.getAmount());
+        intent.putExtra(ManualAddIngredientActivity.NAME_KEY, ingredient.getName());
+        intent.putExtra(ManualAddIngredientActivity.AISLE_KEY, ingredient.getAisle());
+
+        startActivity(intent);
     }
 }

@@ -114,7 +114,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Fix this part
                 FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this,
-                        ingredientChosen.getName(), ingredientChosen.getAisle());
+                        ingredientChosen.getName(), ingredientChosen.getAisle(), -1);
             }
         });
 

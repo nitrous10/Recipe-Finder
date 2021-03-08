@@ -43,4 +43,6 @@ class SpoonacularSearchRecipe {
     void setMissedIngredients(List<SpoonacularRecipeIngredient> missedIngredients) {
         this.missedIngredients = missedIngredients;
     }
+
+
 }

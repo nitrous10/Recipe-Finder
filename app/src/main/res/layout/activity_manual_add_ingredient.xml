@@ -54,32 +54,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/calories"
+            android:text="@string/amount"
             android:textSize="15sp"
             android:layout_marginTop="20dp"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/calories"
-            android:id="@+id/input_calorie"
+            android:hint="@string/amount"
+            android:id="@+id/input_amount"
             android:layout_marginTop="10dp"
             android:inputType="numberDecimal"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/price"
-            android:textSize="15sp"
-            android:layout_marginTop="20dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/price"
-            android:id="@+id/input_price"
-            android:layout_marginTop="10dp"
-            android:inputType="numberDecimal" />
 
     </LinearLayout>
 
