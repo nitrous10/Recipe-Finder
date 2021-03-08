@@ -17,9 +17,11 @@ public class Ingredient {
         this.aisle = aisleClassifier(aisle);
     }
 
+    // Constructor for search add
     public Ingredient(String name, String aisle){
         this.name = name;
         this.aisle = aisleClassifier(aisle);
+        this.amount = -1;
     }
 
     public Ingredient(String name, float amount){
@@ -47,24 +49,28 @@ public class Ingredient {
         }
 
         if (apiAisle.equals("Condiments") || apiAisle.equals("Spices and Seasonings") ||
-                apiAisle.equals("Oil, Vinegar, Salad Dressing")){
-            return "Seasoning";
+                apiAisle.equals("Oil, Vinegar, Salad Dressing") ||
+                apiAisle.equals("Seasoning, Condiments, Dressings")){
+            return "Seasoning, Condiments, Dressings";
         }
         else if(apiAisle.equals("Meat")){
             return apiAisle;
         }
         else if(apiAisle.equals("Pasta and Rice") || apiAisle.equals("Bread") ||
-                apiAisle.equals("Bakery/Bread") || apiAisle.equals("Cereal")){
+                apiAisle.equals("Bakery/Bread") || apiAisle.equals("Cereal") ||
+                apiAisle.equals("Carbs")){
             return "Carbs";
         }
         else if(apiAisle.equals("Nuts") || apiAisle.equals("Nut butters, Jam, and Honey")){
             return "Nuts";
         }
-        else if(apiAisle.equals("Milk, Eggs, Other Dairy") || apiAisle.equals("Cheese")){
+        else if(apiAisle.equals("Milk, Eggs, Other Dairy") || apiAisle.equals("Cheese") ||
+                apiAisle.equals("Dairy") ){
             return "Dairy";
         }
-        else if(apiAisle.equals("Produce") || apiAisle.equals("Dried Fruits")){
-            return "Produce";
+        else if(apiAisle.equals("Produce") || apiAisle.equals("Dried Fruits") ||
+                apiAisle.equals("Fruits and Vegetables")){
+            return "Fruits and Vegetables";
         }
         else if(apiAisle.equals("Seafood")){
             return apiAisle;
