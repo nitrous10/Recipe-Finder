@@ -2,6 +2,7 @@ package com.example.cs65_final_project.fragments;
 
 import android.os.Bundle;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,8 @@ public class FridgeCategorySelectedFragment extends Fragment {
     public static final String CARBS = "Carbs";
     public static final String DAIRY = "Dairy";
     public static final String SEAFOOD = "Seafood";
-    public static final String SEASONING = "Seasoning";
-    public static final String PRODUCE = "Produce";
+    public static final String SEASONING = "Seasoning, Condiments, Dressings";
+    public static final String PRODUCE = "Fruits and Vegetables";
     public static final String BEVERAGES = "Beverages";
     public static final String NUTS = "Nuts";
     public static final String OTHERS = "Others";
@@ -54,6 +55,11 @@ public class FridgeCategorySelectedFragment extends Fragment {
 
         TextView title = view.findViewById(R.id.aisle_title);
         title.setText(aisleSelected);
+        if(aisleSelected.equals(SEASONING)){
+            title.setText("Seasoning"); //Name too long
+        } else if(aisleSelected.equals(PRODUCE)){
+            title.setText("Produce");
+        }
 
         getIngredientList();
         return view;
@@ -80,5 +86,6 @@ public class FridgeCategorySelectedFragment extends Fragment {
         listView.setAdapter(demoAdapter);
 
         FirebaseDatabaseHelper.getFridgeCategory(aisleSelected, ingredients, demoAdapter);
+        Log.d("debug", String.valueOf(ingredients));
     }
 }

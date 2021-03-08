@@ -31,21 +31,19 @@ public class FirebaseDatabaseHelper {
      * Adds an ingredient to Firebase, incrementing the amount of the ingredient if it already exists
      * @param context
      * @param name
-     * @param amount
      */
-    public static void addIngredient(Context context, String name, float amount, String aisle) {
+    public static void addIngredient(Context context, String name, String aisle) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) { // Ingredient already exists in the database
-                    float existingAmount = snapshot.getValue(Float.class);
-                    ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue(existingAmount+amount);
+                    ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name);
                     Log.d("RecipeFinderDatabase", "Added to Existing Ingredient");
                     ((AppCompatActivity)(context)).finish();
                 } else { // Ingredient does not currently exist in the database
-                    ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue(amount);
+                    ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue("0");
                     Log.d("RecipeFinderDatabase", "Added new Ingredient");
                     ((AppCompatActivity)(context)).finish();
                 }
@@ -93,10 +91,10 @@ public class FirebaseDatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) { // Ensures that there is data to retrieve
                     for (DataSnapshot data : snapshot.getChildren()) { // Loops through each ingredient in the fridge
-                        ingredients.add(new Ingredient(data.getKey(), data.getValue(Float.class), category));
+                        ingredients.add(new Ingredient(data.getKey(), category));
                     }
                     fridgeListViewAdapter.notifyDataSetChanged(); // Update the adapter to display all retrieved ingredients
-                    Log.d("RecipeFinderDatabase", "Retrieved Fridge");
+                    Log.d("RecipeFinderDatabase", "Retrieved Fridge " + ingredients);
                 }
             }
 
