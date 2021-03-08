@@ -79,4 +79,6 @@
     <string name="recipe_view_ingredients_title">Ingredients</string>
     <string name="recipe_view_steps_title">Directions</string>
     <string name="share_recipe">Share Recipe</string>
+
+    <string name="delete">Delete</string>
 </resources>

@@ -20,7 +20,7 @@
         <activity android:name=".activities.SearchAddIngredientActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.AccountPage" android:screenOrientation="portrait"/>
         <activity android:name=".activities.RecipeViewActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activities.ManualAddIngredientActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EditOrAddIngredientActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ProfileActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="my_action.startProfileActivity" />

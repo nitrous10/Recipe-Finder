@@ -411,15 +411,13 @@ public class FirebaseDatabaseHelper {
         });
     }
   
-    public static void deleteIngredient(Context context, ArrayList<Ingredient> ingredients, ArrayAdapter<FridgeListViewAdapter> fridgeListViewAdapter, Ingredient ingredient) {
+    public static void deleteIngredient(Context context, Ingredient ingredient) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("users").child(auth.getUid()).child("fridge").child(ingredient.getAisle()).child(ingredient.getName()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Ingredient Deleted", Toast.LENGTH_SHORT).show();
-                ingredients.remove(ingredient);
-                fridgeListViewAdapter.notifyDataSetChanged();
             }
         });
     }

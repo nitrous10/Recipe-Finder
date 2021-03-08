@@ -2,8 +2,6 @@ package com.example.cs65_final_project.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.R;
-import com.example.cs65_final_project.activities.ManualAddIngredientActivity;
+import com.example.cs65_final_project.activities.EditOrAddIngredientActivity;
 import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
 
 import java.util.ArrayList;
@@ -99,11 +96,11 @@ public class FridgeCategorySelectedFragment extends Fragment implements AdapterV
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Ingredient ingredient = (Ingredient)adapterView.getItemAtPosition(i);
 
-        Intent intent = new Intent(getActivity(), ManualAddIngredientActivity.class);
+        Intent intent = new Intent(getActivity(), EditOrAddIngredientActivity.class);
 
-        intent.putExtra(ManualAddIngredientActivity.AMOUNT_KEY, ingredient.getAmount());
-        intent.putExtra(ManualAddIngredientActivity.NAME_KEY, ingredient.getName());
-        intent.putExtra(ManualAddIngredientActivity.AISLE_KEY, ingredient.getAisle());
+        intent.putExtra(EditOrAddIngredientActivity.AMOUNT_KEY, ingredient.getAmount());
+        intent.putExtra(EditOrAddIngredientActivity.NAME_KEY, ingredient.getName());
+        intent.putExtra(EditOrAddIngredientActivity.AISLE_KEY, ingredient.getAisle());
 
         startActivity(intent);
     }

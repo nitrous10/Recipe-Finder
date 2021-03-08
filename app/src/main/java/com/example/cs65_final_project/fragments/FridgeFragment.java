@@ -6,29 +6,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.cs65_final_project.FirebaseDatabaseHelper;
-import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.R;
-import com.example.cs65_final_project.activities.ManualAddIngredientActivity;
+import com.example.cs65_final_project.activities.EditOrAddIngredientActivity;
 import com.example.cs65_final_project.activities.SearchAddIngredientActivity;
-import com.example.cs65_final_project.adapters.FridgeListViewAdapter;
-import com.example.cs65_final_project.adapters.FridgePagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
 
 /**
  * Note that "Category" and "Aisle" is used interchangeably
@@ -101,7 +88,7 @@ public class FridgeFragment extends Fragment implements View.OnClickListener {
         if (view.getId() == R.id.manual_add_ingredient){
             // Second time
             if(searchAdd.getVisibility() != View.GONE){
-                Intent intent = new Intent(getActivity(), ManualAddIngredientActivity.class);
+                Intent intent = new Intent(getActivity(), EditOrAddIngredientActivity.class);
                 startActivity(intent);
             } else{ // First time it's clicked
                 animateButtons();
