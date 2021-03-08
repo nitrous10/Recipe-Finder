@@ -410,7 +410,7 @@ public class FirebaseDatabaseHelper {
             }
         });
     }
-
+  
     public static void deleteIngredient(Context context, ArrayList<Ingredient> ingredients, ArrayAdapter<FridgeListViewAdapter> fridgeListViewAdapter, Ingredient ingredient) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
