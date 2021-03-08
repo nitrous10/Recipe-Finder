@@ -54,7 +54,7 @@ public class FirebaseDatabaseHelper {
                     Log.d("RecipeFinderDatabase", "Added to Existing Ingredient");
                     ((AppCompatActivity)(context)).finish();
                 } else { // Ingredient does not currently exist in the database
-                    ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue("0");
+                    ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue(0);
                     Log.d("RecipeFinderDatabase", "Added new Ingredient");
                     ((AppCompatActivity)(context)).finish();
                 }
