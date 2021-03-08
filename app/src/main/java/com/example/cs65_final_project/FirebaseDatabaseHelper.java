@@ -193,7 +193,7 @@ public class FirebaseDatabaseHelper {
         return results;
     }
 
-    public static void addFriend(Context context, String name, String myName) {
+    public static void addFriend(Context context, String name) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
@@ -215,8 +215,8 @@ public class FirebaseDatabaseHelper {
                 String fullObj = snapshot.getValue().toString();
                 String[] fullObjParts = fullObj.split("=");
                 String followedID = fullObjParts[0].replace("{", "");
-                ref.child("users").child(followedID).child("followers").child(myName)
-                        .setValue(myName);
+                ref.child("users").child(followedID).child("followers").child(auth.getUid())
+                        .setValue(auth.getUid());
             }
 
             @Override
@@ -252,6 +252,44 @@ public class FirebaseDatabaseHelper {
                 if (snapshot.exists()) { // Ensures that there is data to retrieve
                     for (DataSnapshot data : snapshot.getChildren()) {
                         results.add(data.getValue(String.class));
+                    }
+                } else {
+                    results.add("No Results");
+                }
+
+                searchFriendAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return results;
+    }
+
+    public static ArrayList<String> getAllFollowers(SearchFriendAdapter searchFriendAdapter,
+                                                    ArrayList<String> results) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(auth.getUid()).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) { // Ensures that there is data to retrieve
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        ref.child("users").child(data.getValue(String.class)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Log.d("jrv", snapshot.child("name").getValue(String.class));
+                                results.add(snapshot.child("name").getValue(String.class));
+                                searchFriendAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 } else {
                     results.add("No Results");
@@ -406,6 +444,7 @@ public class FirebaseDatabaseHelper {
                 for (String follower : followers) {
                     ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
                 }
+                ref.child("users").child(auth.getUid()).child("posts").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
                 Toast.makeText(context, "Post Created!", Toast.LENGTH_SHORT).show();
                 ((AppCompatActivity)(context)).finish();
             }
