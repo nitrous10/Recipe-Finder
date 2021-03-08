@@ -211,6 +211,24 @@ public class FirebaseDatabaseHelper {
                 String followedID = fullObjParts[0].replace("{", "");
                 ref.child("users").child(followedID).child("followers").child(auth.getUid())
                         .setValue(auth.getUid());
+                ref.child("users").child(followedID).child("posts").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChildren()) {
+                            for (DataSnapshot data : snapshot.getChildren()) {
+                                String stringPost = data.getValue(String.class);
+                                String time = data.getKey();
+                                ref.child("users").child(auth.getUid()).child("feed").child(time).setValue(data.getValue().toString());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
 
             @Override

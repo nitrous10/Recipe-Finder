@@ -61,29 +61,31 @@ public class ViewFriendsActivity extends AppCompatActivity implements ListView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String userChosen = (String) parent.getItemAtPosition(position);
 
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.remove_friend, null);
+        if (!userChosen.equals("No Results")) {
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.remove_friend, null);
 
-        TextView friendLabel = (TextView) dialogView.findViewById(R.id.remove_friend_label);
-        friendLabel.setText(userChosen);
+            TextView friendLabel = (TextView) dialogView.findViewById(R.id.remove_friend_label);
+            friendLabel.setText(userChosen);
 
-        AlertDialog friendDialog = new AlertDialog.Builder(this).setTitle("Remove friend?")
-                .setView(dialogView).create();
+            AlertDialog friendDialog = new AlertDialog.Builder(this).setTitle("Remove friend?")
+                    .setView(dialogView).create();
 
-        friendDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Remove", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                firebaseDatabaseHelper.removeFriend(ViewFriendsActivity.this, userChosen);
-            }
-        });
+            friendDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Remove", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    firebaseDatabaseHelper.removeFriend(ViewFriendsActivity.this, userChosen);
+                }
+            });
 
-        friendDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
+            friendDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
 
-            }
-        });
+                }
+            });
 
-        friendDialog.show();
+            friendDialog.show();
+        }
     }
 
     private void updateListView(){
