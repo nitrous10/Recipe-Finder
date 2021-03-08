@@ -2,6 +2,7 @@ package com.example.cs65_final_project.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.adapters.SearchFriendAdapter;
+import com.example.cs65_final_project.fragments.AccountFragment;
 
 import java.util.ArrayList;
 
@@ -26,12 +28,17 @@ public class ViewFriendsActivity extends AppCompatActivity implements ListView.O
     private ArrayList<String> results;
     private SearchFriendAdapter adapter;
     private Handler resultsHandler;
+    private String type;
 
     private FirebaseDatabaseHelper firebaseDatabaseHelper;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_friends_activity);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra(AccountFragment.BUNDLE_TAG);
+        type = bundle.getString(AccountFragment.FOLLOW_OR_FOLLOWING_TAG);
 
         listView = findViewById(R.id.friends_listview);
         results = new ArrayList<>();
@@ -83,7 +90,11 @@ public class ViewFriendsActivity extends AppCompatActivity implements ListView.O
         resultsHandler.post(new Runnable() {
             @Override
             public void run() {
-                results = FirebaseDatabaseHelper.getAllFriends(adapter, results);
+                if (type.equals("following")) {
+                    results = FirebaseDatabaseHelper.getAllFriends(adapter, results);
+                } else if (type.equals("follow")) {
+                    results = FirebaseDatabaseHelper.getAllFollowers(adapter, results);
+                }
             }
         });
         if(results != null){
