@@ -1,5 +1,7 @@
 package com.example.cs65_final_project;
 
+import androidx.annotation.Nullable;
+
 /**
  * Data type for ingredients. We can maybe create subclasses for vegetables, protein, etc. or
  * even by units (makes more sense to say 3 tomatoes than 100 grams of tomatoes)
@@ -9,9 +11,14 @@ public class Ingredient {
     private float amount;
     private String aisle;
 
-    public Ingredient(String name, float amount, String aisle){
+    public Ingredient(String name, float amount, @Nullable String aisle) {
         this.name = name;
         this.amount = amount;
+        this.aisle = aisleClassifier(aisle);
+    }
+
+    public Ingredient(String name, String aisle){
+        this.name = name;
         this.aisle = aisleClassifier(aisle);
     }
 
@@ -34,7 +41,11 @@ public class Ingredient {
      * @param apiAisle aisle as given by the api
      * @return aisle defined in our app
      */
-    private String aisleClassifier(String apiAisle){
+    private String aisleClassifier(@Nullable String apiAisle) {
+        if (apiAisle == null) {
+            return "Others";
+        }
+
         if (apiAisle.equals("Condiments") || apiAisle.equals("Spices and Seasonings") ||
                 apiAisle.equals("Oil, Vinegar, Salad Dressing")){
             return "Seasoning";

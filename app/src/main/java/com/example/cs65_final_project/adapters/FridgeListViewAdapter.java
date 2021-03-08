@@ -32,10 +32,8 @@ public class FridgeListViewAdapter extends ArrayAdapter<Ingredient> {
 
         //Get ingredient names and amount
         TextView ingredientText = convertView.findViewById(R.id.ingredient);
-        TextView amountText = convertView.findViewById(R.id.amount);
 
         ingredientText.setText(ingredient.getName());
-        amountText.setText(String.valueOf(ingredient.getAmount()));
 
         return convertView;
     }

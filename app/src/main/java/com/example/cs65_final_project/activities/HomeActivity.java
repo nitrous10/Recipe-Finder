@@ -13,7 +13,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.adapters.RecipeFragmentPagerAdapter;
+
 import com.example.cs65_final_project.fragments.AccountFragment;
+
+import com.example.cs65_final_project.fragments.FeedFragment;
+
 import com.example.cs65_final_project.fragments.FridgeFragment;
 import com.example.cs65_final_project.fragments.SearchFragment;
 import com.example.cs65_final_project.fragments.SettingsFragment;
@@ -61,11 +65,11 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             fm.beginTransaction().replace(R.id.frame_layout, search, SEARCH_TAG).commit();
             return true;
         }
-//        else if(item.getItemId() == R.id.feed_page){
-//            Fragment feed = new FeedFragment();
-//            fm.beginTransaction().replace(R.id.frame_layout, feed, FEED_TAG).commit();
-//            return true;
-//        }
+        else if(item.getItemId() == R.id.feed_page){
+            Fragment feed = new FeedFragment();
+            fm.beginTransaction().replace(R.id.frame_layout, feed, FEED_TAG).commit();
+            return true;
+        }
         else if(item.getItemId() == R.id.settings_page){
             Fragment settings = new AccountFragment();
             fm.beginTransaction().replace(R.id.frame_layout, settings, SETTINGS_TAG).commit();

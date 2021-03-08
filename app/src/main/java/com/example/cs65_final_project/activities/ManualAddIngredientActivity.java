@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +19,8 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
 
     Button saveButton;
     Button cancelButton;
-    EditText ingredientEditText, amountEditText;
+    EditText ingredientEditText;
+    Spinner aisle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +29,12 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
         setTitle("Manually Add Ingredient");
 
         ingredientEditText = findViewById(R.id.input_ingredient);
-        amountEditText = findViewById(R.id.input_amount);
         saveButton = findViewById(R.id.save_button);
         cancelButton = findViewById(R.id.cancel_button);
         saveButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
-        Spinner units = findViewById(R.id.input_units);
-        units.setAdapter(ArrayAdapter.createFromResource(this, R.array.ingredient_units,
+        aisle = findViewById(R.id.input_aisle);
+        aisle.setAdapter(ArrayAdapter.createFromResource(this, R.array.aisles,
                 android.R.layout.simple_spinner_dropdown_item));
     }
 
@@ -42,7 +43,7 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
         if(view.getId() == R.id.save_button){
             try {
                 // Add the ingredient to Firebase
-                FirebaseDatabaseHelper.addIngredient(this, ingredientEditText.getText().toString(), Float.parseFloat(amountEditText.getText().toString()), "Others");
+                FirebaseDatabaseHelper.addIngredient(this, ingredientEditText.getText().toString(), aisle.getSelectedItem().toString());
             } catch (Exception e) {
                 Toast.makeText(this, "Invalid Entry", Toast.LENGTH_SHORT).show();
             }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.Recipe;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -28,11 +30,21 @@ public class SuggestedRecipeAdapter extends ArrayAdapter<Recipe> {
 
         if (convertView == null){
             convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.suggested_recipe_textview, parent, false);
+                    .inflate(R.layout.recipe_search_cardview, parent, false);
         }
 
-        TextView recipeText = convertView.findViewById(R.id.recipe_title);
-        recipeText.setText(recipe.getName());
+        ImageView imageView = convertView.findViewById(R.id.recipe_image);
+        Picasso.get().load(recipe.getImageUrl())
+                .placeholder(R.drawable.placeholder)
+                .fit()
+                .centerCrop()
+                .into(imageView);
+
+        TextView recipeTitle = convertView.findViewById(R.id.recipe_title);
+        recipeTitle.setText(recipe.getName());
+
+        TextView recipeTime = convertView.findViewById(R.id.recipe_time);
+        recipeTime.setText(String.format("%d minutes", recipe.getTime()));
 
         return convertView;
     }
