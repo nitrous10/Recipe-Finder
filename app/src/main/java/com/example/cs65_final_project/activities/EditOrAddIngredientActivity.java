@@ -28,6 +28,7 @@ public class EditOrAddIngredientActivity extends AppCompatActivity implements Vi
 
     private String aisle;
     private String name;
+    private boolean editing = false;
 
     public static final String NAME_KEY = "name";
     public static final String AMOUNT_KEY = "amount";
@@ -54,6 +55,7 @@ public class EditOrAddIngredientActivity extends AppCompatActivity implements Vi
         // If edit instead of add
         if(bundle != null){
             setTitle("Edit Ingredient");
+            editing = true;
 
             name = bundle.getString(NAME_KEY);
             ingredientEditText.setText(name);
@@ -101,7 +103,9 @@ public class EditOrAddIngredientActivity extends AppCompatActivity implements Vi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.entry_delete, menu);
+        if(editing){
+            getMenuInflater().inflate(R.menu.entry_delete, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
