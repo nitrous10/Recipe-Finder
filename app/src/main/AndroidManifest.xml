@@ -18,6 +18,7 @@
         <activity android:name=".activities.SearchFriendsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ViewFriendsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.SearchAddIngredientActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AccountPage" android:screenOrientation="portrait"/>
         <activity android:name=".activities.RecipeViewActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ManualAddIngredientActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ProfileActivity" android:screenOrientation="portrait">

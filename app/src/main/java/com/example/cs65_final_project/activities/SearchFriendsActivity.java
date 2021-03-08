@@ -45,8 +45,7 @@ public class SearchFriendsActivity extends AppCompatActivity implements ListView
     private ArrayList<String> results;
     private Handler resultsHandler;
     private SearchFriendAdapter adapter;
-
-    private FirebaseDatabaseHelper firebaseDatabaseHelper;
+    private TextView myName;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +59,9 @@ public class SearchFriendsActivity extends AppCompatActivity implements ListView
 
         resultsHandler = new Handler(handlerThread.getLooper());
 
+        myName = findViewById(R.id.your_name);
+        FirebaseDatabaseHelper.getName(myName);
+
         SearchView searchView = findViewById(R.id.friends_search_view);
         searchView.setOnQueryTextListener(this);
 
@@ -67,8 +69,6 @@ public class SearchFriendsActivity extends AppCompatActivity implements ListView
         adapter = new SearchFriendAdapter(this, results);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
-
-        firebaseDatabaseHelper = new FirebaseDatabaseHelper();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class SearchFriendsActivity extends AppCompatActivity implements ListView
         friendDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                firebaseDatabaseHelper.addFriend(SearchFriendsActivity.this, userChosen);
+                FirebaseDatabaseHelper.addFriend(SearchFriendsActivity.this, userChosen, myName.getText().toString());
             }
         });
 

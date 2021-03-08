@@ -60,6 +60,12 @@
     <string name="title_activity_search_friends">SearchFriendsActivity</string>
 
     <string name="friends_list">Your Friends:</string>
+
+    <string name="followers_initial">Followers: 0</string>
+    <string name="following_initial">Following: 0</string>
+
+    <string name="find_friends">Find Friends!</string>
+    <string name="your_settings">Manage Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
