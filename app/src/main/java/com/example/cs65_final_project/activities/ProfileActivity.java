@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -55,17 +56,21 @@ public class ProfileActivity extends AppCompatActivity {
         nameEditText = findViewById(R.id.input_name);
         bioEditText = findViewById(R.id.self_introduction);
         emailEditText = findViewById(R.id.input_email);
+        emailEditText.setEnabled(false);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
+            Log.d("Recipe Finder", "New Account");
             isNew = bundle.getBoolean(NEW_PROFILE);
             newEmail = bundle.getString(EMAIL);
             newPassword = bundle.getString(PASSWORD);
+            emailEditText.setText(newEmail);
         }
 
         if (!isNew) {
             nameEditText.setHint("Loading");
             bioEditText.setHint("Loading");
+            nameEditText.setEnabled(false);
             loadProfile();
         }
     }
@@ -85,7 +90,6 @@ public class ProfileActivity extends AppCompatActivity {
                 FirebaseAuthHelper.createUser(this, newEmail, newPassword, nameEditText.getText().toString(), bioEditText.getText().toString());
                 FirebaseStorageHelper.savePicture(pic);
             } catch (Exception e) {
-                Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
             }
         } else {
             try {
