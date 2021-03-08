@@ -29,13 +29,6 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    // Constructor for manual add
-    public Ingredient(String name, @Nullable float amount, String aisle, boolean manual){
-        this.name = name;
-        this.amount = amount;
-        this.aisle = aisleClassifier(aisle);
-    }
-
     public String getAisle() { return aisle; }
 
     public float getAmount() {

@@ -74,7 +74,7 @@ public class ManualAddIngredientActivity extends AppCompatActivity implements Vi
                 // Add the ingredient to Firebase
                 if(!amountEditText.getText().toString().equals("")){
                     Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString(),
-                            Float.valueOf(amountEditText.getText().toString()), aisle.getSelectedItem().toString(), true);
+                            Float.valueOf(amountEditText.getText().toString()), aisle.getSelectedItem().toString());
                     FirebaseDatabaseHelper.addIngredient(this, ingredient.getName(), ingredient.getAisle(), ingredient.getAmount());
                 }
                 else{
