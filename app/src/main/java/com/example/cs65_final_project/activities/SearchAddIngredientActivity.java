@@ -4,21 +4,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.text.InputType;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.Ingredient;
@@ -98,19 +95,18 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
         Log.d("debug", "OnItemClick called for ingredient: " + ingredientChosen);
 
         // Start dialog for amount
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.edit_text, null);
-        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Amount")
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.are_you_sure, null);
+        TextView text = dialogView.findViewById(R.id.saving_ingredient);
+        text.setText(ingredientChosen.getName());
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Are you sure?")
                 .setView(dialogView).create();
 
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                EditText input = dialogView.findViewById(R.id.input);
-                input.setInputType(InputType.TYPE_CLASS_PHONE);
-                FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this, ingredientChosen.getName(),
-                        Float.parseFloat(input.getText().toString()), ingredientChosen.getAisle());
-                // Add units and such later
-                // Add with aisles
+                //Fix this part
+                FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this,
+                        ingredientChosen.getName(), ingredientChosen.getAisle());
             }
         });
 

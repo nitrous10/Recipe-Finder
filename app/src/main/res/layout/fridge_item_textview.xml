@@ -2,7 +2,7 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="15dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -10,11 +10,4 @@
         android:text="@string/ingredient_name"
         android:textSize="20sp"
         android:id="@+id/ingredient"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/amount"
-        android:id="@+id/amount"/>
-
 </LinearLayout>

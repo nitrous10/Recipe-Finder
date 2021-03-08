@@ -17,6 +17,11 @@ public class Ingredient {
         this.aisle = aisleClassifier(aisle);
     }
 
+    public Ingredient(String name, String aisle){
+        this.name = name;
+        this.aisle = aisleClassifier(aisle);
+    }
+
     public Ingredient(String name, float amount){
         this.name = name;
         this.amount = amount;

@@ -1,0 +1,6 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/save_question"
+    android:textSize="30sp"
+    android:gravity="center"
+    android:id="@+id/saving_ingredient"/>
