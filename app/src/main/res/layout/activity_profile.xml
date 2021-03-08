@@ -21,14 +21,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/name"
+            android:text="Display Name"
             android:textSize="20sp"
             android:layout_marginTop="20dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name_hint"
+            android:hint="Display Name"
             android:id="@+id/input_name"
             android:layout_marginTop="5dp"
             android:inputType="text"/>

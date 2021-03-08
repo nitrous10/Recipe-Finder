@@ -15,8 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.Executor;
 
@@ -29,19 +32,39 @@ public class FirebaseAuthHelper {
      * @param password
      */
     public static void createUser(Context context, String email, String password, String name, String bio) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult> () {
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) { // Account was successfully created
-                    Log.d("RecipeFinderAuth", "Account Created!");
-                    Toast.makeText(context, "Account Created!", Toast.LENGTH_SHORT).show();
-                    addNewToDataBase(name, bio); // Add the user to the database of users
-                    ((AppCompatActivity)(context)).finish();
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    context.startActivity(intent);
-                } else { // Account was not successfully created
+        if (name.isEmpty() || name.contains(".") || name.contains("$") || name.contains("#") || name.contains("[") || name.contains("]") || name.contains("/")) {
+            Log.d("RecipeFinderAuth", "Sign up Failed!");
+            Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        FirebaseDatabase.getInstance().getReference().child("displayNames").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(name)) {
                     Log.d("RecipeFinderAuth", "Sign up Failed!");
                     Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
+                } else {
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult> () {
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) { // Account was successfully created
+                                Log.d("RecipeFinderAuth", "Account Created!");
+                                Toast.makeText(context, "Account Created!", Toast.LENGTH_SHORT).show();
+                                addNewToDataBase(name, bio); // Add the user to the database of users
+                                ((AppCompatActivity)(context)).finish();
+                                Intent intent = new Intent(context, HomeActivity.class);
+                                context.startActivity(intent);
+                            } else { // Account was not successfully created
+                                Log.d("RecipeFinderAuth", "Sign up Failed!");
+                                Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -62,6 +85,7 @@ public class FirebaseAuthHelper {
         ref.child("users").child(uid).child("units").setValue("imperial");
         ref.child("users").child(uid).child("feed").setValue("null");
         ref.child("users").child(uid).child("name").setValue(name);
+        ref.child("displayNames").child(name).setValue(name);
         ref.child("users").child(uid).child("bio").setValue(bio);
         ref.child("users").child(uid).child("posts").setValue("null");
     }

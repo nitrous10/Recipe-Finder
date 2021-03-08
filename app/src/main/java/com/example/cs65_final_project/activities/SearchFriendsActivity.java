@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.example.cs65_final_project.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,17 +41,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SearchFriendsActivity extends AppCompatActivity implements ListView.OnItemClickListener,
-        SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener, View.OnClickListener {
 
     private ArrayList<String> results;
     private Handler resultsHandler;
     private SearchFriendAdapter adapter;
+    private FloatingActionButton backButton;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_friends);
         setTitle("Search for friends");
+
+        backButton = findViewById(R.id.search_friends_back);
+        backButton.setOnClickListener(this);
 
         results = new ArrayList<>();
         HandlerThread handlerThread = new HandlerThread("FriendResultThread");
@@ -122,6 +127,12 @@ public class SearchFriendsActivity extends AppCompatActivity implements ListView
         if(results != null){
             adapter.updateData(results);
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.search_friends_back) {
+            finish();
         }
     }
 }

@@ -19,14 +19,16 @@ import com.example.cs65_final_project.FirebaseDatabaseHelper;
 import com.example.cs65_final_project.R;
 import com.example.cs65_final_project.adapters.SearchFriendAdapter;
 import com.example.cs65_final_project.fragments.AccountFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class ViewFriendsActivity extends AppCompatActivity implements ListView.OnItemClickListener {
+public class ViewFriendsActivity extends AppCompatActivity implements ListView.OnItemClickListener, View.OnClickListener {
 
     private ListView listView;
     private ArrayList<String> results;
     private SearchFriendAdapter adapter;
+    private FloatingActionButton backButton;
     private Handler resultsHandler;
     private String type;
 
@@ -39,6 +41,9 @@ public class ViewFriendsActivity extends AppCompatActivity implements ListView.O
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(AccountFragment.BUNDLE_TAG);
         type = bundle.getString(AccountFragment.FOLLOW_OR_FOLLOWING_TAG);
+
+        backButton = findViewById(R.id.view_friends_back);
+        backButton.setOnClickListener(this);
 
         listView = findViewById(R.id.friends_listview);
         results = new ArrayList<>();
@@ -103,6 +108,12 @@ public class ViewFriendsActivity extends AppCompatActivity implements ListView.O
             adapter.updateData(results);
             Log.d("jrv", Integer.toString(results.size()));
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.view_friends_back) {
+            finish();
         }
     }
 }
