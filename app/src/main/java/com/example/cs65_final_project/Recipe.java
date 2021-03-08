@@ -8,12 +8,18 @@ import java.util.List;
 public class Recipe {
 
     private final String name;
+    private final String imageUrl;
     private final List<Ingredient> ingredients;
     private final List<String> steps;
     private final int time;
 
-    public Recipe(String name, List<Ingredient> ingredients, List<String> steps, int time) {
+    public Recipe(String name,
+                  String imageUrl,
+                  List<Ingredient> ingredients,
+                  List<String> steps,
+                  int time) {
         this.name = name;
+        this.imageUrl = imageUrl;
         this.ingredients = ingredients;
         this.steps = steps;
         this.time = time;
@@ -21,6 +27,10 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public List<Ingredient> getIngredients() {

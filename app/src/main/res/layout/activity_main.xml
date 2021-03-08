@@ -5,20 +5,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
 
         <TextView
+            android:layout_below="@+id/logo"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_alignParentLeft="true"
             android:textColor="@color/brick_red"
             android:textStyle="bold"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:id="@+id/emailTextView"
-            android:text="Email">
-
-        </TextView>
+            android:text="Email" />
 
         <EditText
             android:id="@+id/emailEditText"
@@ -28,9 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:hint="Email"
-            android:inputType="textEmailAddress">
-
-        </EditText>
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,9 +47,7 @@
             android:layout_below="@+id/emailEditText"
             android:layout_marginTop="10dp"
             android:id="@+id/passwordTextView"
-            android:text="Password">
-
-        </TextView>
+            android:text="Password" />
 
         <EditText
             android:layout_width="match_parent"
@@ -54,9 +57,7 @@
             android:layout_below="@id/passwordTextView"
             android:layout_marginTop="5dp"
             android:id="@+id/passwordEditText"
-            android:hint="Password">
-
-        </EditText>
+            android:hint="Password" />
 
         <LinearLayout
             android:id="@+id/loginChangeLinearLayout"
@@ -74,9 +75,7 @@
                 android:backgroundTint="@color/brick_red"
                 android:onClick="loginButtonPressed"
                 android:layout_margin="5dp"
-                android:text="Login">
-
-            </Button>
+                android:text="Login" />
 
             <Button
                 android:layout_width="0dp"
@@ -85,10 +84,7 @@
                 android:backgroundTint="@color/brick_red"
                 android:onClick="changePasswordPressed"
                 android:layout_margin="5dp"
-                android:text="Change Password">
-
-            </Button>
-
+                android:text="Change Password" />
         </LinearLayout>
 
         <TextView
@@ -99,9 +95,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:text="or"
-            android:textColor="@color/brick_red">
-
-        </TextView>
+            android:textColor="@color/brick_red" />
 
         <Button
             android:layout_width="wrap_content"
@@ -111,10 +105,6 @@
             android:layout_centerHorizontal="true"
             android:backgroundTint="@color/brick_red"
             android:layout_marginTop="5dp"
-            android:onClick="createAccountPressed">
-
-        </Button>
-
+            android:onClick="createAccountPressed" />
     </RelativeLayout>
-
 </ScrollView>

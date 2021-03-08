@@ -69,4 +69,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="aisle_name">Aisle name</string>
     <string name="save_question">Save?</string>
+  
+    <string name="recipe_view_ingredients_title">Ingredients</string>
+    <string name="recipe_view_steps_title">Directions</string>
 </resources>
