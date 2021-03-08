@@ -18,6 +18,7 @@
         <activity android:name=".activities.SearchFriendsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ViewFriendsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.SearchAddIngredientActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AccountPage" android:screenOrientation="portrait"/>
         <activity android:name=".activities.RecipeViewActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ManualAddIngredientActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ProfileActivity" android:screenOrientation="portrait">
@@ -37,6 +38,8 @@
         <activity android:name=".activities.ChangePasswordActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.CreateAccountActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.HomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.CreatePost" android:screenOrientation="portrait"
+            android:theme="@style/Theme.CS65_Final_Project.PostStyle"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"

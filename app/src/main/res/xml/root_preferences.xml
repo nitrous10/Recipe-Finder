@@ -16,50 +16,10 @@
             app:summary="Change account"
             app:key="Accounts"/>
 
-        <Preference
-            android:title="Find your friends!"
-            android:summary="Add Friends">
-
-            <intent android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.cs65_final_project"
-                android:targetClass="com.example.cs65_final_project.activities.SearchFriendsActivity"/>
-
-        </Preference>
-
-        <Preference
-            android:title="Manage your Friends"
-            android:summary="View Friends">
-
-            <intent android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.cs65_final_project"
-                android:targetClass="com.example.cs65_final_project.activities.ViewFriendsActivity"/>
-
-        </Preference>
-
 
         <androidx.preference.PreferenceScreen
             app:title="Logout"
             app:key="Logout"/>
-
-    </androidx.preference.PreferenceCategory>
-
-    <androidx.preference.PreferenceCategory app:title="Recipes">
-
-        <androidx.preference.PreferenceScreen
-            app:key="Allergies"
-            app:title="Allergies"
-            app:summary="Select allergies to filter"
-            app:dialogTitle="Select allergies">
-        </androidx.preference.PreferenceScreen>
-
-        <androidx.preference.ListPreference
-            app:key="units"
-            app:title="Units"
-            app:entryValues="@array/units"
-            app:entries="@array/units"
-            app:summary="Choose units from imperial or metric"
-            app:dialogTitle="Unit Preference"
-            />
 
     </androidx.preference.PreferenceCategory>
 

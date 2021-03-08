@@ -1,11 +1,14 @@
 package com.example.cs65_final_project.spoonacular;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.example.cs65_final_project.Ingredient;
 import com.example.cs65_final_project.Recipe;
 import com.example.cs65_final_project.exceptions.SpoonacularException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +28,14 @@ public class SpoonacularGatewayController {
                                    int numOfResults) throws SpoonacularException {
         List<SpoonacularSearchRecipe> spoonacularSearchRecipes =
                 mClient.searchRecipes(ingredients, numOfResults);
-        List<SpoonacularRecipe> spoonacularRecipes = mClient.getRecipes(
-                spoonacularSearchRecipes.stream()
-                        .map(SpoonacularSearchRecipe::getId)
-                        .collect(Collectors.toList()));
+
+        List<SpoonacularRecipe> spoonacularRecipes = new ArrayList<>();
+        if (spoonacularSearchRecipes.size() > 0){
+            spoonacularRecipes = mClient.getRecipes(
+                    spoonacularSearchRecipes.stream()
+                            .map(SpoonacularSearchRecipe::getId)
+                            .collect(Collectors.toList()));
+        }
 
         return toRecipes(spoonacularRecipes.stream()
                 .filter(recipe -> matchesSearchQuery(recipe, searchQuery))
