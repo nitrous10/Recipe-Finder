@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/your_name"
+        android:textSize="24sp"/>
 
     <SearchView
         android:id="@+id/friends_search_view"

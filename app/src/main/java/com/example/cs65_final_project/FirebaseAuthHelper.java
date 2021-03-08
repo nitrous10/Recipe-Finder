@@ -56,12 +56,14 @@ public class FirebaseAuthHelper {
 
         // Initialize the new user with a fridge, a list of friends, a list of allergies, and preferred units
         ref.child("users").child(uid).child("fridge").setValue("null");
-        ref.child("users").child(uid).child("friends").setValue("null");
+        ref.child("users").child(uid).child("followers").setValue("null");
+        ref.child("users").child(uid).child("following").setValue("null");
         ref.child("users").child(uid).child("allergies").setValue("null");
         ref.child("users").child(uid).child("units").setValue("imperial");
         ref.child("users").child(uid).child("feed").setValue("null");
         ref.child("users").child(uid).child("name").setValue(name);
         ref.child("users").child(uid).child("bio").setValue(bio);
+        ref.child("users").child(uid).child("posts").setValue("null");
     }
 
     /**
