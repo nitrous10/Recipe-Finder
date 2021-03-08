@@ -73,7 +73,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     public void loadProfile() {
         // FirebaseStorageHelper.loadPicture(pic);
         FirebaseDatabaseHelper.loadAccount(followers, following, name, bio, posts);
-        FirebaseDatabaseHelper.getFeed(getContext(), postsList, feedAdapter);
+        FirebaseDatabaseHelper.getAllPosts(getActivity(), feedAdapter, postsList);
     }
 
     public void followersClicked() {
