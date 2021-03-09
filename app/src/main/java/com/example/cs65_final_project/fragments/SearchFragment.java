@@ -98,6 +98,9 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
         mSearchQueryHandler.removeCallbacksAndMessages(null);
         mSearchQueryHandler.post(() -> {
             try {
+                if (getActivity() == null) {
+                    return;
+                }
                 getActivity().runOnUiThread(() -> {
                     mSearchProgressBar.setVisibility(ProgressBar.VISIBLE);
                 });
@@ -106,11 +109,18 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
 
                 mRecipes.clear();
                 mRecipes.addAll(recipes);
+
+                if (getActivity() == null) {
+                    return;
+                }
                 getActivity().runOnUiThread(() -> {
                     mSearchProgressBar.setVisibility(ProgressBar.INVISIBLE);
                     mSuggestedRecipeAdapter.notifyDataSetChanged();
                 });
             } catch (RecipeSearchException e) {
+                if (getActivity() == null) {
+                    return;
+                }
                 getActivity().runOnUiThread(() -> {
                     mSearchProgressBar.setVisibility(ProgressBar.INVISIBLE);
                     Toast.makeText(getActivity(), "Failed to get recipes!", Toast.LENGTH_LONG)
