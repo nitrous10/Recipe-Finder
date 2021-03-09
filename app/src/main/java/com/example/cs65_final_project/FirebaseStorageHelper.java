@@ -3,6 +3,7 @@ package com.example.cs65_final_project;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FirebaseStorageHelper {
 
     public static void savePicture(CircleImageView circleImageView) {
+        Log.d("Recipe Finder", "Saving picture");
         String uid = FirebaseAuth.getInstance().getUid();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference userRef = storageReference.child(uid);
@@ -36,11 +38,13 @@ public class FirebaseStorageHelper {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
+                Log.d("Recipe Finder", "failed image");
                 // Handle unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d("Recipe Finder", "success image");
                 // Handle successful uploads
             }
         });

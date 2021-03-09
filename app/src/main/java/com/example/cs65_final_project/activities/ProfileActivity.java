@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String PHOTO_GALLERY_TAG = "photo gallery tag";
     public static final String TEMP_FILE_NAME = "temp_profile_pic.jpg";
     public static final int CAMERA_CODE = 0;
-    public static final int GALLERY_CODE = 0;
+    public static final int GALLERY_CODE = 1;
 
     private String newPassword;
     private String newEmail;
@@ -69,7 +69,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (!isNew) {
             nameEditText.setHint("Loading");
-            bioEditText.setHint("Loading");
             nameEditText.setEnabled(false);
             loadProfile();
         }
@@ -93,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         } else {
             try {
-                FirebaseDatabaseHelper.updateProfile(this, nameEditText.getText().toString(), bioEditText.getText().toString());
+                FirebaseDatabaseHelper.updateProfile(this, bioEditText.getText().toString());
                 FirebaseStorageHelper.savePicture(pic);
             } catch (Exception e) {
                 Toast.makeText(this, "Failed to Update Info!", Toast.LENGTH_SHORT).show();

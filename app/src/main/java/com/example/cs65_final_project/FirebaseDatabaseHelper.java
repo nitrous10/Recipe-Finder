@@ -146,10 +146,9 @@ public class FirebaseDatabaseHelper {
 
     }
 
-    public static void updateProfile(Context context, String name, String bio) {
+    public static void updateProfile(Context context, String bio) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(auth.getUid()).child("name").setValue(name);
         ref.child("users").child(auth.getUid()).child("bio").setValue(bio).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
