@@ -453,14 +453,37 @@ public class FirebaseDatabaseHelper {
         ref.child("users").child(auth.getUid()).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("jrv", snapshot.getValue().toString());
                 String[] followers = snapshot.getValue().toString().replace("{","")
                         .replace("}", "").split("=");
                 for (String follower : followers) {
                     Log.d("follower", follower);
-                    ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
+                    ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String name = snapshot.child("name").getValue().toString();
+                            ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + name);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
-                ref.child("users").child(auth.getUid()).child("posts").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + auth.getCurrentUser().getEmail());
+                ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String name = snapshot.child("name").getValue().toString();
+                        ref.child("users").child(auth.getUid()).child("posts").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + name);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 Toast.makeText(context, "Post Created!", Toast.LENGTH_SHORT).show();
                 ((AppCompatActivity)(context)).finish();
             }
