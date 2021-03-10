@@ -40,6 +40,13 @@ public class Post {
         return postComments;
     }
 
+    /**
+     * Retrieves post information from a pre-formatted string and converts it into a post
+     * @param context
+     * @param stringPost
+     * @param time
+     * @return
+     */
     public static Post parsePost(Context context, String stringPost, String time) {
         String[] postComponents = stringPost.split("\\$\\$%%\\$%\\$");
         Log.d("Recipe Finder", stringPost);

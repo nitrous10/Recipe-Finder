@@ -32,7 +32,7 @@ public class FirebaseAuthHelper {
      * @param password
      */
     public static void createUser(Context context, String email, String password, String name, String bio) {
-        if (name.isEmpty() || name.contains(".") || name.contains("$") || name.contains("#") || name.contains("[") || name.contains("]") || name.contains("/")) {
+        if (name.isEmpty() || name.contains(".") || name.contains("$") || name.contains("#") || name.contains("[") || name.contains("]") || name.contains("/")) { // No characters that would conflict with firebase path name restrictions
             Log.d("RecipeFinderAuth", "Sign up Failed!");
             Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
             return;
@@ -40,7 +40,7 @@ public class FirebaseAuthHelper {
         FirebaseDatabase.getInstance().getReference().child("displayNames").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(name)) {
+                if (snapshot.hasChild(name)) { // Display name taken
                     Log.d("RecipeFinderAuth", "Sign up Failed!");
                     Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -51,6 +51,8 @@ public class FirebaseAuthHelper {
                                 Toast.makeText(context, "Account Created!", Toast.LENGTH_SHORT).show();
                                 addNewToDataBase(name, bio); // Add the user to the database of users
                                 ((AppCompatActivity)(context)).finish();
+
+                                // Logged in, show home
                                 Intent intent = new Intent(context, HomeActivity.class);
                                 context.startActivity(intent);
                             } else { // Account was not successfully created

@@ -46,10 +46,10 @@ public class FirebaseDatabaseHelper {
     public static void addIngredient(Context context, String name, String aisle, float amount) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).addListenerForSingleValueEvent(new ValueEventListener() { // Access specified category of user's fridge
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue(amount);
+                ref.child("users").child(auth.getUid()).child("fridge").child(aisle).child(name).setValue(amount); // Add ingredient and amount to database location
                 Log.d("RecipeFinderDatabase", "Added to Existing Ingredient");
                 ((AppCompatActivity)(context)).finish();
             }
@@ -61,14 +61,20 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Gets all of the ingredients in a user's fridge
+     * @param ingredients
+     * @param listener
+     */
     public static void getIngredients(List<Ingredient> ingredients, GetIngredientsListener listener) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         ref.child("users").child(auth.getUid()).child("fridge")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() { // Reference the location of the user's fridge
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    // Loop through each fridge category
                     snapshot.getChildren().forEach(category ->
                             category.getChildren().forEach(ingredient ->
                                     ingredients.add(new Ingredient(
@@ -84,10 +90,16 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Gets ingredients of specified category
+     * @param category
+     * @param ingredients
+     * @param fridgeListViewAdapter
+     */
     public static void getFridgeCategory(String category, ArrayList<Ingredient> ingredients, FridgeListViewAdapter fridgeListViewAdapter) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        ref.child("users").child(auth.getUid()).child("fridge").child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).child("fridge").child(category).addListenerForSingleValueEvent(new ValueEventListener() { // Reference to location of user fridge category
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) { // Ensures that there is data to retrieve
@@ -106,15 +118,21 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Loads the user's personal information for the profile
+     * @param nameEditText
+     * @param bioEditText
+     * @param emailEditText
+     */
     public static void loadProfile(EditText nameEditText, EditText bioEditText, EditText emailEditText) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() { // Reference to location of user info
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                nameEditText.setText(snapshot.child("name").getValue(String.class));
-                bioEditText.setText(snapshot.child("bio").getValue(String.class));
-                emailEditText.setText(auth.getCurrentUser().getEmail());
+                nameEditText.setText(snapshot.child("name").getValue(String.class)); // Name
+                bioEditText.setText(snapshot.child("bio").getValue(String.class)); // Bio
+                emailEditText.setText(auth.getCurrentUser().getEmail()); // Email
             }
 
             @Override
@@ -124,18 +142,26 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Load information pertaining to the user's account
+     * @param followers
+     * @param following
+     * @param name
+     * @param bio
+     * @param posts
+     */
     public static void loadAccount(TextView followers, TextView following, TextView name, TextView bio, ListView posts) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() { // Reference to location of user info
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 followersCount(followers);
                 followingCount(following);
 
-                name.setText(snapshot.child("name").getValue(String.class));
-                bio.setText(snapshot.child("bio").getValue(String.class));
+                name.setText(snapshot.child("name").getValue(String.class)); // Name
+                bio.setText(snapshot.child("bio").getValue(String.class)); // Bio
             }
 
             @Override
@@ -149,7 +175,7 @@ public class FirebaseDatabaseHelper {
     public static void updateProfile(Context context, String bio) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(auth.getUid()).child("bio").setValue(bio).addOnSuccessListener(new OnSuccessListener<Void>() {
+        ref.child("users").child(auth.getUid()).child("bio").setValue(bio).addOnSuccessListener(new OnSuccessListener<Void>() { // Reference to location of user bio
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Profile Updated!", Toast.LENGTH_SHORT).show();
@@ -158,12 +184,19 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Retrieves possible users for when a user wants to search for a friend
+     * @param query
+     * @param searchFriendAdapter
+     * @param results
+     * @return
+     */
     public static ArrayList<String> getFriendSearchResults(String query, SearchFriendAdapter searchFriendAdapter,
                                                            ArrayList<String> results) {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        ref.child("users").orderByChild("name").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").orderByChild("name").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() { // Query users to find name
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) { // Ensures that there is data to retrieve
@@ -186,11 +219,16 @@ public class FirebaseDatabaseHelper {
         return results;
     }
 
+    /**
+     * Handles follower updates and updates users' feeds accordingly
+     * @param context
+     * @param name
+     */
     public static void addFriend(Context context, String name) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("users").child(auth.getUid()).child("following").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).child("following").child(name).addListenerForSingleValueEvent(new ValueEventListener() { // Update that user is following new person
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ref.child("users").child(auth.getUid()).child("following").child(name).setValue(name);
@@ -202,14 +240,17 @@ public class FirebaseDatabaseHelper {
 
             }
         });
-        ref.child("users").orderByChild("name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").orderByChild("name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() { // Update that person being followed has a new follower
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Find the user that got followed
                 String fullObj = snapshot.getValue().toString();
                 String[] fullObjParts = fullObj.split("=");
                 String followedID = fullObjParts[0].replace("{", "");
                 ref.child("users").child(followedID).child("followers").child(auth.getUid())
                         .setValue(auth.getUid());
+
+                // Update the feed based on the new follow
                 ref.child("users").child(followedID).child("posts").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -237,6 +278,10 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Retrieves current user name
+     * @param name
+     */
     public static void getName(TextView name) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -253,6 +298,12 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Retrieves the names of all friends
+     * @param searchFriendAdapter
+     * @param results
+     * @return
+     */
     public static ArrayList<String> getAllFriends(SearchFriendAdapter searchFriendAdapter,
                                      ArrayList<String> results) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -279,6 +330,12 @@ public class FirebaseDatabaseHelper {
         return results;
     }
 
+    /**
+     * Retrieves the names of all followers
+     * @param searchFriendAdapter
+     * @param results
+     * @return
+     */
     public static ArrayList<String> getAllFollowers(SearchFriendAdapter searchFriendAdapter,
                                                     ArrayList<String> results) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -290,7 +347,7 @@ public class FirebaseDatabaseHelper {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         ref.child("users").child(data.getValue(String.class)).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            public void onDataChange(@NonNull DataSnapshot snapshot) { // Retrieve the names and update the adapter to show the names
                                 Log.d("jrv", snapshot.child("name").getValue(String.class));
                                 results.add(snapshot.child("name").getValue(String.class));
                                 searchFriendAdapter.notifyDataSetChanged();
@@ -317,19 +374,27 @@ public class FirebaseDatabaseHelper {
         return results;
     }
 
+    /**
+     * Retrieve all of the current user's posts
+     * @param context
+     * @param feedListViewAdapter
+     * @param results
+     * @return
+     */
     public static ArrayList<Post> getAllPosts(Context context, FeedListViewAdapter feedListViewAdapter,
                                                   ArrayList<Post> results) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(auth.getUid()).child("posts").addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("users").child(auth.getUid()).child("posts").addListenerForSingleValueEvent(new ValueEventListener() { // Location of user's posts
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot data : snapshot.getChildren()) {
+                        // Retrieve string posts and convert to objects
                         String stringPost = data.getValue(String.class);
                         String time = data.getKey();
                         Post post = Post.parsePost(context, stringPost, time);
-                        results.add(0, post);
+                        results.add(0, post); // Most recent posts at start
                     }
                     feedListViewAdapter.notifyDataSetChanged();
                 } else {
@@ -402,6 +467,11 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Stop following other user
+     * @param context
+     * @param name
+     */
     public static void removeFriend(Context context, String name) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -420,6 +490,12 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Populate feed with list of posts saved in Firebase
+     * @param context
+     * @param posts
+     * @param feedListViewAdapter
+     */
     public static void getFeed(Context context, ArrayList<Post> posts, FeedListViewAdapter feedListViewAdapter) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -428,6 +504,7 @@ public class FirebaseDatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot data : snapshot.getChildren()) {
+                        // Format each post string and convert to an object
                         String stringPost = data.getValue(String.class);
                         String time = data.getKey();
                         Post post = Post.parsePost(context, stringPost, time);
@@ -446,6 +523,15 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    /**
+     * Save post to user's list of posts and followers' feeds
+     * @param context
+     * @param title
+     * @param time
+     * @param ingredients
+     * @param steps
+     * @param comments
+     */
     public static void post(Context context, String title, String time, String ingredients, String steps, String comments) {
         long postTime = System.currentTimeMillis();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -453,13 +539,15 @@ public class FirebaseDatabaseHelper {
         ref.child("users").child(auth.getUid()).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Find followers to update their feeds
                 String[] followers = snapshot.getValue().toString().replace("{","")
                         .replace("}", "").split("=");
-                for (String follower : followers) {
+                for (String follower : followers) { // Loop through each follower
                     Log.d("follower", follower);
                     ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            // Update individual follower's feed
                             String name = snapshot.child("name").getValue().toString();
                             ref.child("users").child(follower).child("feed").child(""+postTime).setValue(title + "$$%%$%$" + time + "$$%%$%$" + ingredients + "$$%%$%$" + steps + "$$%%$%$" + comments + "$$%%$%$" + name);
 
@@ -472,7 +560,7 @@ public class FirebaseDatabaseHelper {
                     });
 
                 }
-                ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                ref.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() { // Deal with current user's list of posts
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String name = snapshot.child("name").getValue().toString();
@@ -494,11 +582,16 @@ public class FirebaseDatabaseHelper {
             }
         });
     }
-  
+
+    /**
+     * Delete an ingredient from the fridge
+     * @param context
+     * @param ingredient
+     */
     public static void deleteIngredient(Context context, Ingredient ingredient) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(auth.getUid()).child("fridge").child(ingredient.getAisle()).child(ingredient.getName()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+        ref.child("users").child(auth.getUid()).child("fridge").child(ingredient.getAisle()).child(ingredient.getName()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() { // Location of ingredient in firebase
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Ingredient Deleted", Toast.LENGTH_SHORT).show();

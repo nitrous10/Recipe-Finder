@@ -25,8 +25,9 @@ public class FirebaseStorageHelper {
         Log.d("Recipe Finder", "Saving picture");
         String uid = FirebaseAuth.getInstance().getUid();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        StorageReference userRef = storageReference.child(uid);
+        StorageReference userRef = storageReference.child(uid); // Location in firebase storage where image will be saved
 
+        // Retrieve the image from the profile image and convert it to an uploadable format
         circleImageView.setDrawingCacheEnabled(true);
         circleImageView.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) circleImageView.getDrawable()).getBitmap();
@@ -34,18 +35,16 @@ public class FirebaseStorageHelper {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        UploadTask uploadTask = userRef.putBytes(data);
+        UploadTask uploadTask = userRef.putBytes(data); // Upload the image as a byte array
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception exception) {
+            public void onFailure(@NonNull Exception exception) { // Handle unsuccessful uploads
                 Log.d("Recipe Finder", "failed image");
-                // Handle unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) { // Handle successful uploads
                 Log.d("Recipe Finder", "success image");
-                // Handle successful uploads
             }
         });
     }
@@ -53,13 +52,14 @@ public class FirebaseStorageHelper {
     public static void loadPicture(CircleImageView circleImageView) {
         String uid = FirebaseAuth.getInstance().getUid();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        StorageReference userRef = storageReference.child(uid);
+        StorageReference userRef = storageReference.child(uid); // Location in firebase storage where image is stored
 
-        final long Five_MEGABYTES = 1024*1024*5;
+        final long FIVE_MEGABYTES = 1024*1024*5; // Maximum size of file that can be downloaded
         Log.d("Recipe Finder", "Loading Picture");
-        userRef.getBytes(Five_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        userRef.getBytes(FIVE_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() { // Retrieve the image byte array from storage
             @Override
-            public void onSuccess(byte[] bytes) {
+            public void onSuccess(byte[] bytes) { // Handle successful downloads
+                // Format byte array to specify image for imageView
                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 circleImageView.setImageBitmap(bmp);
                 Log.d("Recipe Finder", "Success Pic");
