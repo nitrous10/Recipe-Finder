@@ -34,7 +34,7 @@ public class AccountPage extends AppCompatActivity implements ListView.OnItemCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        pic = findViewById(R.id.profile_pic);
+        pic = findViewById(R.id.account_profile_pic);
         followers = findViewById(R.id.followers);
         following = findViewById(R.id.following);
         name = findViewById(R.id.name);
@@ -57,6 +57,7 @@ public class AccountPage extends AppCompatActivity implements ListView.OnItemCli
     }
 
     public void loadProfile() {
+        Log.d("Recipe Finder", "Loading Profile");
         FirebaseStorageHelper.loadPicture(pic);
         FirebaseDatabaseHelper.loadAccount(followers, following, name, bio, posts);
     }

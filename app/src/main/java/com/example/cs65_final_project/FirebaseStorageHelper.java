@@ -56,11 +56,13 @@ public class FirebaseStorageHelper {
         StorageReference userRef = storageReference.child(uid);
 
         final long Five_MEGABYTES = 1024*1024*5;
+        Log.d("Recipe Finder", "Loading Picture");
         userRef.getBytes(Five_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 circleImageView.setImageBitmap(bmp);
+                Log.d("Recipe Finder", "Success Pic");
             }
         });
     }

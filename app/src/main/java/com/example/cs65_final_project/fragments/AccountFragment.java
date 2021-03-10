@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_account, container, false);
 
-        pic = view.findViewById(R.id.profile_pic);
+        pic = view.findViewById(R.id.account_profile_pic);
         followers = view.findViewById(R.id.followers);
         following = view.findViewById(R.id.following);
 
@@ -71,7 +71,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     }
 
     public void loadProfile() {
-        // FirebaseStorageHelper.loadPicture(pic);
+        FirebaseStorageHelper.loadPicture(pic);
         FirebaseDatabaseHelper.loadAccount(followers, following, name, bio, posts);
         FirebaseDatabaseHelper.getAllPosts(getActivity(), feedAdapter, postsList);
     }
