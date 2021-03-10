@@ -12,15 +12,8 @@
         </androidx.preference.PreferenceScreen>
 
         <androidx.preference.PreferenceScreen
-            app:title="Account"
-            app:summary="Change account"
-            app:key="Accounts"/>
-
-
-        <androidx.preference.PreferenceScreen
             app:title="Logout"
             app:key="Logout"/>
 
     </androidx.preference.PreferenceCategory>
-
 </androidx.preference.PreferenceScreen>
