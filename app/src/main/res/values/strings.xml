@@ -81,4 +81,11 @@
     <string name="share_recipe">Share Recipe</string>
 
     <string name="delete">Delete</string>
+    <string name="others">Others</string>
+    <string name="nuts">Nuts</string>
+    <string name="beverages">Beverages</string>
+    <string name="seasoning">Seasoning</string>
+    <string name="dairy">Dairy</string>
+    <string name="carbs">Carbs</string>
+    <string name="meat">Meat</string>
 </resources>

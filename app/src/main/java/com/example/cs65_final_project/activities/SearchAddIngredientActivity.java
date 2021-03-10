@@ -80,6 +80,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
     }
 
     private void updateListView(String s){
+        resultsHandler.removeCallbacksAndMessages(null);
         resultsHandler.post(new Runnable() {
             @Override
             public void run() {

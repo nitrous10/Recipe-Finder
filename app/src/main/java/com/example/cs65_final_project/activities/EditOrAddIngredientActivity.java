@@ -68,12 +68,15 @@ public class EditOrAddIngredientActivity extends AppCompatActivity implements Vi
                     aisleSpinner.setSelection(i);
                 }
             }
-            Log.d("debug", bundle.getFloat(AMOUNT_KEY) + "");
+
             if(bundle.getFloat(AMOUNT_KEY) == -1){
                 amountEditText.setText("");
             } else{
                 amountEditText.setText((int) bundle.getFloat(AMOUNT_KEY) + "");
             }
+
+            ingredientEditText.setFocusable(false);
+            aisleSpinner.setEnabled(false);
         }
     }
 
