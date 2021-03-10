@@ -77,7 +77,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:id="@+id/add_following"
             android:text="@string/find_friends"/>
@@ -86,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/manage_settings"
             android:text="@string/your_settings"
             />
