@@ -82,7 +82,7 @@ public class EditOrAddIngredientActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.save_button){
+        if(view.getId() == R.id.save_button){ // Save changes
             try {
                 // Add the ingredient to Firebase
                 if(!amountEditText.getText().toString().equals("")){
@@ -106,7 +106,7 @@ public class EditOrAddIngredientActivity extends AppCompatActivity implements Vi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(editing){
+        if(editing){ // Delete button
             getMenuInflater().inflate(R.menu.entry_delete, menu);
         }
         return super.onCreateOptionsMenu(menu);

@@ -57,7 +57,6 @@ public class FridgeFragment extends Fragment implements View.OnClickListener {
         if (searchAdd != null){
             searchAdd.setVisibility(View.GONE);
         }
-        getIngredientList(); // Retrieve ingredients from Firebase
     }
 
     /** Animation for spinning manual add button and showing search add button*/
@@ -67,19 +66,6 @@ public class FridgeFragment extends Fragment implements View.OnClickListener {
         searchAdd.animate().setDuration(200).alpha(1f).start();
 
         manualAdd.animate().setDuration(200).rotation(180f).start();
-    }
-
-    /**
-     * Retrieves ingredients from the database and populates the listView
-     */
-    public void getIngredientList() {
-        // Set up the adapter
-//        ingredients = new ArrayList<>();
-//        FridgeListViewAdapter demoAdapter = new FridgeListViewAdapter(getActivity(), ingredients);
-//        listView.setAdapter(demoAdapter);
-
-        // Update the adapter with the retrieved ingredients
-//        FirebaseDatabaseHelper.getIngredients(ingredients, demoAdapter);
     }
 
     /** Handles onClick for the floating buttons*/

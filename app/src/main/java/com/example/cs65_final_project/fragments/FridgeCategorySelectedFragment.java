@@ -74,7 +74,7 @@ public class FridgeCategorySelectedFragment extends Fragment implements AdapterV
         Fragment categories = new FridgeCategoryFragment();
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
         ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        ft.replace(R.id.current_fridge, categories).commit();
+        ft.replace(R.id.current_fridge, categories).commit(); // Go back to fridge
     }
 
     public void getIngredientList() {

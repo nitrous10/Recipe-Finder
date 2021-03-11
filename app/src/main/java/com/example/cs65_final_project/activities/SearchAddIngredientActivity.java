@@ -80,6 +80,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
     }
 
     private void updateListView(String s){
+        // Get data from firebase to update listView
         resultsHandler.removeCallbacksAndMessages(null);
         resultsHandler.post(new Runnable() {
             @Override
@@ -103,7 +104,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
         Ingredient ingredientChosen = (Ingredient)adapterView.getItemAtPosition(i);
         Log.d("debug", "OnItemClick called for ingredient: " + ingredientChosen);
 
-        // Start dialog for amount
+        // Start dialog to check for the ingredient
         View dialogView = LayoutInflater.from(this).inflate(R.layout.are_you_sure, null);
         TextView text = dialogView.findViewById(R.id.saving_ingredient);
         text.setText(ingredientChosen.getName());
@@ -113,7 +114,7 @@ public class SearchAddIngredientActivity extends AppCompatActivity implements Li
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //Fix this part
+                // Save ingredient
                 FirebaseDatabaseHelper.addIngredient(SearchAddIngredientActivity.this,
                         ingredientChosen.getName(), ingredientChosen.getAisle(), -1);
             }

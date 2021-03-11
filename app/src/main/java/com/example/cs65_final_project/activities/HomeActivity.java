@@ -87,7 +87,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             fridge.runBackAnimation(); // Run slide animation
         }
         else if(fridge != null){
-            // Do nothing if fridge fragment, but category is not selected
+            // Do nothing if fridge fragment, category is not selected
         }
         else{
             super.onBackPressed();
